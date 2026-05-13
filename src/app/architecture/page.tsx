@@ -256,7 +256,7 @@ export default function ArchitecturePage() {
 
       {/* Footer */}
       <div className="mt-8 pt-4 border-t border-slate-800 flex items-center justify-between text-[9px] text-slate-500">
-        <span>Solace Agent Mesh — Event-Driven AI Agent Coordination for Manufacturing</span>
+        <span>Solace Agent+Event Mesh — Real-Time Intelligence for Manufacturing & Supply Chain</span>
         <span className="flex items-center gap-2">
           <span className="h-2 w-2 rounded-full bg-[#00c895]" />
           solace.com
