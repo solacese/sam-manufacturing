@@ -50,7 +50,7 @@ export function CustomDisruptionInput() {
     <div className="mb-3">
       <div className="flex items-center gap-2">
         <Sparkles className="h-3 w-3 text-[#00c895]" />
-        <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">AI-Powered Event Generation</span>
+        <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">AI Event Generator</span>
         {error && <span className="text-[9px] text-red-400 ml-2">{error}</span>}
         {!prompt && !loading && (
           <div className="ml-auto flex gap-1">

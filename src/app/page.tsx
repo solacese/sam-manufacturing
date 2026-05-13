@@ -70,7 +70,7 @@ export default function Home() {
           </div>
 
           {/* BOTTOM: Disruption injection */}
-          <div className="flex-shrink-0 border-t border-slate-800 bg-[#0f1729] px-4 py-3">
+          <div className="flex-shrink-0 border-t border-slate-800 bg-[#0f1729] px-4 py-2.5">
             <CustomDisruptionInput />
             <DisruptionInjector />
           </div>

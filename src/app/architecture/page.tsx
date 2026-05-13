@@ -201,12 +201,12 @@ export default function ArchitecturePage() {
 
           {/* Use Cases */}
           <div className="rounded-xl border border-slate-700 bg-slate-900/50 p-4">
-            <h3 className="text-xs font-bold text-white mb-3">Enterprise Use Cases</h3>
+            <h3 className="text-xs font-bold text-white mb-3">Agent+Event Mesh Use Cases</h3>
             <div className="grid grid-cols-2 gap-2">
-              <UseCase industry="Aerospace" company="Airbus / Boeing" example="Wing assembly disruption → multi-agent rerouting across 6 plants" />
-              <UseCase industry="Automotive" company="BMW / Toyota" example="Supply chain delay → automatic alternate sourcing + schedule optimization" />
-              <UseCase industry="Pharma" company="Pfizer / Roche" example="Cleanroom excursion → compliance agent + batch containment in under 1 min" />
-              <UseCase industry="Semiconductors" company="TSMC / Intel" example="Yield drift detection → SPC agent + predictive maintenance coordination" />
+              <UseCase industry="Aerospace" company="Airbus / Boeing" example="Event: Wing assembly sensor anomaly → Agents: reroute production across 6 plants in seconds" />
+              <UseCase industry="Automotive" company="BMW / Toyota" example="Event: Supplier delay detected → Agents: alternate sourcing + schedule optimization via A2A" />
+              <UseCase industry="Pharma" company="Pfizer / Roche" example="Event: Cleanroom temp excursion → Agents: compliance + containment in under 1 minute" />
+              <UseCase industry="Semiconductors" company="TSMC / Intel" example="Event: Yield drift on SPC chart → Agents: predictive maintenance + root cause analysis" />
             </div>
           </div>
         </div>
