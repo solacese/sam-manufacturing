@@ -63,7 +63,7 @@ export function WelcomeOverlay() {
           <button onClick={dismiss} className="w-full rounded-lg bg-[#00c895] hover:bg-[#00ad84] py-2.5 text-sm font-semibold text-white transition-all active:scale-[0.98]">
             Start Demo
           </button>
-          <p className="text-[9px] text-slate-500 text-center mt-2">Press Enter to start</p>
+          <p className="text-[9px] text-slate-500 text-center mt-2">Press Enter to start · 306 flows · 8 industries · 9 agents</p>
         </div>
       </div>
     </div>
