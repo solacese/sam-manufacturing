@@ -20,7 +20,7 @@ export function ToastContainer() {
   useEffect(() => {
     if (resolutionComplete && activeDisruptions.length > 0) {
       const id = `toast-${Date.now()}`
-      setToasts(prev => [...prev, { id, type: 'success', text: `${activeDisruptions.length} disruption${activeDisruptions.length > 1 ? 's' : ''} resolved by Agent Mesh` }])
+      setToasts(prev => [...prev, { id, type: 'success', text: `${activeDisruptions.length} event${activeDisruptions.length > 1 ? 's' : ''} resolved via Agent+Event Mesh` }])
       setTimeout(() => setToasts(prev => prev.filter(t => t.id !== id)), 4000)
     }
   }, [resolutionComplete])
@@ -29,7 +29,7 @@ export function ToastContainer() {
     if (isResolving && activeDisruptions.length > 0) {
       const latest = activeDisruptions[activeDisruptions.length - 1]
       const id = `toast-${Date.now()}`
-      setToasts(prev => [...prev, { id, type: 'alert', text: `Detected: ${latest.name}` }])
+      setToasts(prev => [...prev, { id, type: 'alert', text: `Event Mesh → Agent Mesh: ${latest.name}` }])
       setTimeout(() => setToasts(prev => prev.filter(t => t.id !== id)), 3000)
     }
   }, [activeDisruptions.length])
