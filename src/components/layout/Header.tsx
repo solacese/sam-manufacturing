@@ -6,6 +6,7 @@ import { Activity, Wifi, Network, Zap, RotateCcw, Maximize2, Share2 } from 'luci
 import Link from 'next/link'
 import { AutoDemo } from './AutoDemo'
 import { DemoScript } from './DemoScript'
+import { SessionSummary } from './SessionSummary'
 
 export function Header() {
   const events = useSimulationStore((s) => s.events)
@@ -73,6 +74,7 @@ export function Header() {
         <button onClick={() => document.documentElement.requestFullscreen?.()} className="text-slate-500 hover:text-white transition-colors" title="Fullscreen">
           <Maximize2 className="h-3 w-3" />
         </button>
+        <SessionSummary />
         <button onClick={() => { navigator.clipboard?.writeText(window.location.href); }} className="text-slate-500 hover:text-white transition-colors" title="Copy demo URL">
           <Share2 className="h-3 w-3" />
         </button>
