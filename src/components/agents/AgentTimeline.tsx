@@ -36,10 +36,10 @@ export function AgentTimeline({ messages }: AgentTimelineProps) {
           <div className="flex items-center gap-1.5 px-2 py-1.5 rounded-md bg-slate-800/30 border border-slate-700/30 w-fit">
             <div className="flex gap-0.5">
               <span className="h-1.5 w-1.5 rounded-full bg-[#00c895] animate-bounce" style={{ animationDelay: '0ms' }} />
-              <span className="h-1.5 w-1.5 rounded-full bg-[#00c895] animate-bounce" style={{ animationDelay: '150ms' }} />
-              <span className="h-1.5 w-1.5 rounded-full bg-[#00c895] animate-bounce" style={{ animationDelay: '300ms' }} />
+              <span className="h-1.5 w-1.5 rounded-full bg-[#00c895] animate-bounce" style={{ animationDelay: '100ms' }} />
+              <span className="h-1.5 w-1.5 rounded-full bg-[#00c895] animate-bounce" style={{ animationDelay: '200ms' }} />
             </div>
-            <span className="text-[8px] text-slate-500">agents coordinating...</span>
+            <span className="text-[8px] text-slate-500">agents coordinating via A2A protocol...</span>
           </div>
         </div>
       )}
