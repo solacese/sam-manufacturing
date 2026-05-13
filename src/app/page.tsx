@@ -70,7 +70,9 @@ export default function Home() {
                 {view === 'production' && <div className="flex-1"><FlowSelector /></div>}
               </div>
               {view === 'production' && <ScenarioGenerator />}
-              {view === 'production' ? <ManufacturingFlowViz /> : <SupplyChainView />}
+              <div key={view} className="animate-fade-in flex-1 flex flex-col min-h-0">
+                {view === 'production' ? <ManufacturingFlowViz /> : <SupplyChainView />}
+              </div>
               <MeshHealth />
             </div>
 

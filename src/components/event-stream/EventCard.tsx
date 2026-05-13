@@ -26,7 +26,7 @@ export const EventCard = memo(function EventCard({ event, selected }: { event: S
   return (
     <div className={cn(
       'flex items-center gap-1.5 py-[3px] text-[9px] font-mono border-b border-slate-800/30 animate-fade-in transition-colors',
-      isCritical && 'bg-red-500/5 border-b-red-500/20',
+      isCritical && 'bg-red-500/8 border-b-red-500/30 border-l-2 border-l-red-500',
       selected && 'bg-[#00c895]/5 border-b-[#00c895]/30'
     )}>
       <span className={cn('h-1.5 w-1.5 rounded-full flex-shrink-0', isCritical && 'animate-pulse')} style={{ backgroundColor: isCritical ? '#ef4444' : color }} />
