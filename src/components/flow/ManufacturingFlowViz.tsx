@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { useSimulationStore } from '@/store/simulation-store'
 import { FlowStepStatus } from '@/types'
 import { cn } from '@/lib/cn'
@@ -33,6 +34,20 @@ export function ManufacturingFlowViz() {
   const selectedFlow = useSimulationStore((s) => s.selectedFlow)
   const flowStepStatuses = useSimulationStore((s) => s.flowStepStatuses)
 
+  const [oee, setOee] = useState({ oee: 87.2, avail: 94.1, perf: 96.3, qual: 96.2 })
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setOee(prev => ({
+        oee: +(prev.oee + (Math.random() - 0.5) * 0.4).toFixed(1),
+        avail: +(prev.avail + (Math.random() - 0.5) * 0.3).toFixed(1),
+        perf: +(prev.perf + (Math.random() - 0.5) * 0.3).toFixed(1),
+        qual: +(prev.qual + (Math.random() - 0.5) * 0.2).toFixed(1),
+      }))
+    }, 3000)
+    return () => clearInterval(interval)
+  }, [])
+
   if (!selectedFlow) return <div className="flex-1 flex items-center justify-center text-slate-500 text-sm">Select a flow</div>
 
   return (
@@ -42,10 +57,10 @@ export function ManufacturingFlowViz() {
         <h3 className="text-[11px] font-bold text-white">{selectedFlow.category}</h3>
         <span className="text-[9px] text-slate-500 font-mono">{selectedFlow.plant}/{selectedFlow.line}</span>
         <div className="ml-auto flex gap-3">
-          <MetricPill label="OEE" value="87.2%" accent />
-          <MetricPill label="Avail" value="94.1%" />
-          <MetricPill label="Perf" value="96.3%" />
-          <MetricPill label="Qual" value="96.2%" />
+          <MetricPill label="OEE" value={`${oee.oee}%`} accent />
+          <MetricPill label="Avail" value={`${oee.avail}%`} />
+          <MetricPill label="Perf" value={`${oee.perf}%`} />
+          <MetricPill label="Qual" value={`${oee.qual}%`} />
           <MetricPill label="Takt" value={selectedFlow.taktTime} />
           <MetricPill label="FPY" value={`${selectedFlow.firstPassYield.toFixed(1)}%`} accent />
         </div>
