@@ -26,6 +26,8 @@ export function Header() {
       </div>
 
       <div className="flex items-center gap-4 text-[10px] text-slate-400">
+        <span className="text-[8px] font-bold text-slate-500 bg-slate-800 rounded px-1.5 py-0.5 border border-slate-700">DEMO</span>
+
         <Link href="/architecture" className="flex items-center gap-1.5 text-[#00c895] hover:text-white transition-colors font-semibold text-[10px]">
           <Network className="h-3 w-3" />Architecture
         </Link>

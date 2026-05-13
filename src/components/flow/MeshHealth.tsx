@@ -1,31 +1,30 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Activity } from 'lucide-react'
+import { Activity, Server, Cpu } from 'lucide-react'
+import { useSimulationStore } from '@/store/simulation-store'
 
 export function MeshHealth() {
-  const [stats, setStats] = useState({ topics: 847, subscribers: 23, throughput: 25400 })
+  const events = useSimulationStore((s) => s.events)
+  const isResolving = useSimulationStore((s) => s.isResolving)
+  const [throughput, setThroughput] = useState(24800)
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setStats(s => ({
-        topics: s.topics + (Math.random() > 0.8 ? 1 : 0),
-        subscribers: s.subscribers + (Math.random() > 0.95 ? 1 : Math.random() < 0.05 ? -1 : 0),
-        throughput: Math.round(24000 + Math.random() * 3000),
-      }))
+      setThroughput(Math.round(23000 + Math.random() * 4000))
     }, 2000)
     return () => clearInterval(interval)
   }, [])
 
   return (
-    <div className="flex items-center gap-4 text-[8px] font-mono text-slate-500 mt-2">
+    <div className="flex items-center gap-4 text-[8px] font-mono text-slate-500 mt-1 px-1">
       <span className="flex items-center gap-1">
         <Activity className="h-2.5 w-2.5 text-[#00c895]" />
-        <span className="text-slate-400">Mesh:</span>
+        <span className="text-slate-400">Solace PubSub+ Mesh</span>
       </span>
-      <span>{stats.topics} topics</span>
-      <span>{stats.subscribers} subscribers</span>
-      <span className="text-[#00c895]">{stats.throughput.toLocaleString()} msg/s</span>
+      <span><Server className="h-2.5 w-2.5 inline mr-0.5" />{events.length > 200 ? '847' : '312'} topics</span>
+      <span><Cpu className="h-2.5 w-2.5 inline mr-0.5" />{throughput.toLocaleString()} msg/s</span>
+      {isResolving && <span className="text-amber-400">A2A protocol active</span>}
     </div>
   )
 }
