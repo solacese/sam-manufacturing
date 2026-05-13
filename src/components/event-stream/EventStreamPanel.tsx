@@ -8,6 +8,7 @@ import { EVENT_COLORS } from '@/lib/constants'
 import { Radio, Pause, Play, X } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import { formatTimestamp } from '@/lib/utils'
+import { Sparkline } from './Sparkline'
 
 const filterOptions: { key: EventCategory; label: string }[] = [
   { key: 'iot', label: 'IoT' },
@@ -70,10 +71,15 @@ export function EventStreamPanel() {
             <span className="text-[8px] font-bold text-slate-300 uppercase tracking-wider">Event Detail</span>
             <button onClick={() => setSelectedEvent(null)} className="text-slate-500 hover:text-white"><X className="h-3 w-3" /></button>
           </div>
-          <div className="text-[9px] font-mono space-y-0.5">
-            <div className="text-slate-400">Time: <span className="text-slate-200">{formatTimestamp(selectedEvent.timestamp)}</span></div>
+          <div className="text-[9px] font-mono space-y-1">
+            <div className="text-slate-400">Time: <span className="text-slate-200">{formatTimestamp(selectedEvent.timestamp)}</span> | Category: <span className="text-slate-200 uppercase">{selectedEvent.category}</span> | Severity: <span className={selectedEvent.severity === 'critical' ? 'text-red-400' : 'text-slate-200'}>{selectedEvent.severity}</span></div>
             <div className="text-slate-400">Topic: <span className="text-[#00c895]">{selectedEvent.topic}</span></div>
-            <div className="text-slate-400">Payload: <span className="text-slate-200">{JSON.stringify(selectedEvent.payload)}</span></div>
+            <div className="text-slate-400">Payload:</div>
+            <div className="bg-slate-800/50 rounded p-1.5 text-slate-300 text-[8px] overflow-x-auto">
+              {Object.entries(selectedEvent.payload).map(([k, v]) => (
+                <div key={k}><span className="text-slate-500">{k}:</span> <span className="text-white">{String(v)}</span></div>
+              ))}
+            </div>
           </div>
         </div>
       )}
@@ -85,11 +91,15 @@ export function EventStreamPanel() {
           </div>
         ))}
       </div>
-      <div className="border-t border-slate-800 px-3 py-1.5 text-[8px] font-mono text-slate-500 flex justify-between items-center">
-        <span>{displayEvents.length} / {events.length}</span>
-        <span className={cn('font-bold', paused ? 'text-amber-400' : 'text-[#00c895]')}>
-          {paused ? '⏸ PAUSED' : '● LIVE ~25 ev/s'}
-        </span>
+      {/* Sparkline + status */}
+      <div className="border-t border-slate-800">
+        <Sparkline />
+        <div className="px-3 py-1 text-[8px] font-mono text-slate-500 flex justify-between items-center">
+          <span>{displayEvents.length} / {events.length}</span>
+          <span className={cn('font-bold', paused ? 'text-amber-400' : 'text-[#00c895]')}>
+            {paused ? '⏸ PAUSED' : '● LIVE'}
+          </span>
+        </div>
       </div>
     </div>
   )
