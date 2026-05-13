@@ -58,7 +58,7 @@ export function AgentWorkspacePanel() {
       {/* Mesh topology visualization */}
       {(hasDisruptions || agentMessages.length === 0) && (
         <div className="flex-shrink-0 border-b border-slate-800 px-3 py-1">
-          <MeshTopology active={isResolving} />
+          <MeshTopology active={isResolving} activeAgents={[...new Set(agentMessages.map(m => m.fromAgent))]} />
         </div>
       )}
 

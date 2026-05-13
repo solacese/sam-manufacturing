@@ -20,7 +20,8 @@ const connections: [number, number][] = [
   [1, 3], [1, 7], [2, 5], [2, 6], [3, 4], [5, 8], [6, 8], [7, 8],
 ]
 
-export function MeshTopology({ active }: { active: boolean }) {
+export function MeshTopology({ active, activeAgents = [] }: { active: boolean; activeAgents?: AgentRole[] }) {
+  const activeSet = new Set(activeAgents)
   return (
     <svg viewBox="0 0 100 100" className="w-full h-[90px]" preserveAspectRatio="xMidYMid meet">
       {/* Connections */}
@@ -41,25 +42,28 @@ export function MeshTopology({ active }: { active: boolean }) {
       ))}
 
       {/* Nodes */}
-      {nodes.map((node, i) => (
+      {nodes.map((node, i) => {
+        const isNodeActive = activeSet.has(node.role)
+        return (
         <g key={node.role}>
-          {active && (
+          {(active || isNodeActive) && (
             <circle cx={node.x} cy={node.y} r="4" fill={AGENT_COLORS[node.role]} opacity="0.2">
-              <animate attributeName="r" values="3;5;3" dur={`${1.5 + i * 0.1}s`} repeatCount="indefinite" />
-              <animate attributeName="opacity" values="0.2;0.4;0.2" dur={`${1.5 + i * 0.1}s`} repeatCount="indefinite" />
+              <animate attributeName="r" values="3;6;3" dur={`${1.5 + i * 0.1}s`} repeatCount="indefinite" />
+              <animate attributeName="opacity" values="0.1;0.5;0.1" dur={`${1.5 + i * 0.1}s`} repeatCount="indefinite" />
             </circle>
           )}
           <circle
-            cx={node.x} cy={node.y} r="2.5"
+            cx={node.x} cy={node.y} r={isNodeActive ? 3 : 2.5}
             fill={AGENT_COLORS[node.role]}
-            stroke={active ? '#fff' : '#1e293b'}
-            strokeWidth="0.5"
+            stroke={isNodeActive ? '#fff' : active ? '#fff' : '#1e293b'}
+            strokeWidth={isNodeActive ? 0.8 : 0.5}
           />
           <text x={node.x} y={node.y + 7} textAnchor="middle" fontSize="3" fill="#94a3b8" fontFamily="sans-serif">
             {node.role === 'orchestrator' ? 'ORCH' : node.role === 'digital-twin' ? 'TWIN' : node.role.slice(0, 4).toUpperCase()}
           </text>
         </g>
-      ))}
+        )
+      })}
 
       {/* Data packets flowing along connections when active */}
       {active && connections.slice(0, 6).map(([from, to], i) => (
