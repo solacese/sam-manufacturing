@@ -9,8 +9,8 @@ interface LLMOptions {
   maxTokens?: number
 }
 
-const BASE_URL = process.env.URL || 'https://lite-llm.mymaas.net'
-const API_KEY = process.env.KEY || ''
+const BASE_URL = process.env.LLM_URL || process.env.URL || 'https://lite-llm.mymaas.net'
+const API_KEY = process.env.LLM_KEY || process.env.KEY || ''
 
 export async function callLLM(messages: Message[], options: LLMOptions = {}): Promise<string> {
   const response = await fetch(`${BASE_URL}/v1/chat/completions`, {

@@ -60,7 +60,7 @@ export const PLANTS = [
   { id: 'plant-sao-paulo', name: 'São Paulo Plant', country: 'Brazil' },
 ]
 
-export const MAX_EVENTS = 200
-export const EVENT_INTERVAL_IOT = 400
-export const EVENT_INTERVAL_MES = 3000
-export const EVENT_INTERVAL_ERP = 7000
+export const MAX_EVENTS = 500
+export const EVENT_INTERVAL_IOT = 40
+export const EVENT_INTERVAL_MES = 200
+export const EVENT_INTERVAL_ERP = 500
