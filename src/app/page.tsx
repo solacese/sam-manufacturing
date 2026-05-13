@@ -47,6 +47,10 @@ export default function Home() {
       <WelcomeOverlay />
       <ToastContainer />
       <Header />
+      {/* Event mesh activity indicator */}
+      <div className="h-[2px] bg-slate-900 relative overflow-hidden flex-shrink-0">
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#00c895]/40 to-transparent animate-flow-particle" />
+      </div>
 
       <div className="flex-1 flex min-h-0">
         {/* LEFT: Event Stream */}
