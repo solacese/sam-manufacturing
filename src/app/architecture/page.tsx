@@ -202,17 +202,7 @@ export default function ArchitecturePage() {
           )}
 
           {/* Data Flow Summary */}
-          <div className="rounded-xl border border-slate-700 bg-slate-900/50 p-4">
-            <h3 className="text-xs font-bold text-white mb-3">Data Flow</h3>
-            <div className="space-y-2 text-[10px]">
-              <FlowStep num="1" text="IoT sensors publish telemetry to Solace topics" color="#22d3ee" />
-              <FlowStep num="2" text="MES/SCADA publish production events" color="#a78bfa" />
-              <FlowStep num="3" text="Orchestrator Agent subscribes to anomaly patterns" color="#00c895" />
-              <FlowStep num="4" text="Disruption detected → A2A delegation to specialists" color="#f97316" />
-              <FlowStep num="5" text="Agents coordinate resolution via event mesh" color="#8b5cf6" />
-              <FlowStep num="6" text="Resolution actions published back to MES/CMMS/ERP" color="#fbbf24" />
-            </div>
-          </div>
+          <DataFlowSection />
 
           {/* Key Metrics */}
           <div className="rounded-xl border border-slate-700 bg-slate-900/50 p-4">
@@ -232,11 +222,38 @@ export default function ArchitecturePage() {
   )
 }
 
-function FlowStep({ num, text, color }: { num: string; text: string; color: string }) {
+
+
+const dataFlowSteps = [
+  { num: '1', text: 'IoT sensors publish telemetry to Solace topics', color: '#22d3ee' },
+  { num: '2', text: 'MES/SCADA publish production events', color: '#a78bfa' },
+  { num: '3', text: 'Orchestrator Agent subscribes to anomaly patterns', color: '#00c895' },
+  { num: '4', text: 'Disruption detected → A2A delegation to specialists', color: '#f97316' },
+  { num: '5', text: 'Agents coordinate resolution via event mesh', color: '#8b5cf6' },
+  { num: '6', text: 'Resolution actions published back to MES/CMMS/ERP', color: '#fbbf24' },
+]
+
+function DataFlowSection() {
+  const [activeStep, setActiveStep] = useState(0)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveStep(s => (s + 1) % dataFlowSteps.length)
+    }, 3000)
+    return () => clearInterval(interval)
+  }, [])
+
   return (
-    <div className="flex items-center gap-2">
-      <span className="h-5 w-5 rounded-full flex items-center justify-center text-[8px] font-bold text-white flex-shrink-0" style={{ backgroundColor: color }}>{num}</span>
-      <span className="text-slate-300">{text}</span>
+    <div className="rounded-xl border border-slate-700 bg-slate-900/50 p-4">
+      <h3 className="text-xs font-bold text-white mb-3">Data Flow <span className="text-[8px] text-slate-500 font-normal ml-2">auto-cycling</span></h3>
+      <div className="space-y-2 text-[10px]">
+        {dataFlowSteps.map((step, i) => (
+          <div key={step.num} className={cn('flex items-center gap-2 transition-all duration-500 rounded px-1.5 py-0.5', i === activeStep ? 'bg-slate-800 scale-[1.02]' : 'opacity-60')}>
+            <span className="h-5 w-5 rounded-full flex items-center justify-center text-[8px] font-bold text-white flex-shrink-0" style={{ backgroundColor: step.color, boxShadow: i === activeStep ? `0 0 8px ${step.color}60` : undefined }}>{step.num}</span>
+            <span className="text-slate-300">{step.text}</span>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

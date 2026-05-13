@@ -8,6 +8,7 @@ import { ScenarioGenerator } from '@/components/flow/ScenarioGenerator'
 import { ManufacturingFlowViz } from '@/components/flow/ManufacturingFlowViz'
 import { MeshHealth } from '@/components/flow/MeshHealth'
 import { FlowBackground } from '@/components/flow/FlowBackground'
+import { WelcomeOverlay } from '@/components/layout/WelcomeOverlay'
 import { DisruptionInjector } from '@/components/disruption/DisruptionInjector'
 import { CustomDisruptionInput } from '@/components/disruption/CustomDisruptionInput'
 import { AgentWorkspacePanel } from '@/components/agents/AgentWorkspacePanel'
@@ -32,6 +33,7 @@ export default function Home() {
 
   return (
     <div className="h-screen w-screen overflow-hidden flex flex-col bg-[#0b1120]">
+      <WelcomeOverlay />
       <Header />
 
       <div className="flex-1 flex min-h-0">
