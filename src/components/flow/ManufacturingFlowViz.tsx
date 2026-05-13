@@ -35,22 +35,23 @@ export function ManufacturingFlowViz() {
   const flowStepStatuses = useSimulationStore((s) => s.flowStepStatuses)
 
   const [oee, setOee] = useState({ oee: 87.2, avail: 94.1, perf: 96.3, qual: 96.2 })
+  const errorCount = flowStepStatuses.filter(s => s === 'error').length
 
   useEffect(() => {
     const interval = setInterval(() => {
+      const impact = errorCount * 3
       setOee(prev => ({
-        oee: +(prev.oee + (Math.random() - 0.5) * 0.4).toFixed(1),
-        avail: +(prev.avail + (Math.random() - 0.5) * 0.3).toFixed(1),
-        perf: +(prev.perf + (Math.random() - 0.5) * 0.3).toFixed(1),
-        qual: +(prev.qual + (Math.random() - 0.5) * 0.2).toFixed(1),
+        oee: +(Math.max(40, 87.2 - impact + (Math.random() - 0.5) * 0.4)).toFixed(1),
+        avail: +(Math.max(50, 94.1 - impact * 1.2 + (Math.random() - 0.5) * 0.3)).toFixed(1),
+        perf: +(Math.max(60, 96.3 - impact * 0.8 + (Math.random() - 0.5) * 0.3)).toFixed(1),
+        qual: +(Math.max(70, 96.2 - impact * 0.5 + (Math.random() - 0.5) * 0.2)).toFixed(1),
       }))
-    }, 3000)
+    }, 2000)
     return () => clearInterval(interval)
-  }, [])
+  }, [errorCount])
 
   if (!selectedFlow) return <div className="flex-1 flex items-center justify-center text-slate-500 text-sm">Select a flow</div>
 
-  const errorCount = flowStepStatuses.filter(s => s === 'error').length
   const isCascade = errorCount >= 4
 
   return (
