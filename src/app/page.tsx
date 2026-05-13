@@ -1,11 +1,13 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Header } from '@/components/layout/Header'
 import { EventStreamPanel } from '@/components/event-stream/EventStreamPanel'
 import { FlowSelector } from '@/components/flow/FlowSelector'
 import { ScenarioGenerator } from '@/components/flow/ScenarioGenerator'
 import { ManufacturingFlowViz } from '@/components/flow/ManufacturingFlowViz'
+import { SupplyChainView } from '@/components/flow/SupplyChainView'
+import { ViewToggle } from '@/components/flow/ViewToggle'
 import { MeshHealth } from '@/components/flow/MeshHealth'
 import { FlowBackground } from '@/components/flow/FlowBackground'
 import { WelcomeOverlay } from '@/components/layout/WelcomeOverlay'
@@ -24,6 +26,7 @@ export default function Home() {
 
   const selectFlow = useSimulationStore((s) => s.selectFlow)
   const selectedFlow = useSimulationStore((s) => s.selectedFlow)
+  const [view, setView] = useState<'production' | 'supply-chain'>('production')
 
   useEffect(() => {
     if (!selectedFlow) {
@@ -51,9 +54,12 @@ export default function Home() {
             {/* CENTER: Flow */}
             <div className="flex-1 flex flex-col px-4 py-3 gap-2 min-w-0 relative">
               <FlowBackground />
-              <FlowSelector />
-              <ScenarioGenerator />
-              <ManufacturingFlowViz />
+              <div className="flex items-center gap-3">
+                <ViewToggle view={view} onChange={setView} />
+                {view === 'production' && <div className="flex-1"><FlowSelector /></div>}
+              </div>
+              {view === 'production' && <ScenarioGenerator />}
+              {view === 'production' ? <ManufacturingFlowViz /> : <SupplyChainView />}
               <MeshHealth />
             </div>
 
