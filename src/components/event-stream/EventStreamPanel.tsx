@@ -68,19 +68,34 @@ export function EventStreamPanel() {
 
       {/* Event detail popup */}
       {selectedEvent && (
-        <div className="border-b border-slate-800 bg-slate-900/80 px-3 py-2 animate-fade-in">
-          <div className="flex items-center justify-between mb-1">
-            <span className="text-[8px] font-bold text-slate-300 uppercase tracking-wider">Event Detail</span>
-            <button onClick={() => setSelectedEvent(null)} className="text-slate-500 hover:text-white"><X className="h-3 w-3" /></button>
+        <div className="border-b border-slate-800 bg-slate-900/90 px-3 py-2.5 animate-fade-in">
+          <div className="flex items-center justify-between mb-1.5">
+            <span className="text-[8px] font-bold text-[#00c895] uppercase tracking-wider">Event Inspector</span>
+            <button onClick={() => { setSelectedEvent(null); setPaused(false) }} className="text-[8px] text-slate-500 hover:text-white flex items-center gap-1"><X className="h-3 w-3" />Resume</button>
           </div>
-          <div className="text-[9px] font-mono space-y-1">
-            <div className="text-slate-400">Time: <span className="text-slate-200">{formatTimestamp(selectedEvent.timestamp)}</span> | Category: <span className="text-slate-200 uppercase">{selectedEvent.category}</span> | Severity: <span className={selectedEvent.severity === 'critical' ? 'text-red-400' : 'text-slate-200'}>{selectedEvent.severity}</span></div>
-            <div className="text-slate-400">Topic: <span className="text-[#00c895]">{selectedEvent.topic}</span></div>
-            <div className="text-slate-400">Payload:</div>
-            <div className="bg-slate-800/50 rounded p-1.5 text-slate-300 text-[8px] overflow-x-auto">
-              {Object.entries(selectedEvent.payload).map(([k, v]) => (
-                <div key={k}><span className="text-slate-500">{k}:</span> <span className="text-white">{String(v)}</span></div>
-              ))}
+          <div className="text-[9px] font-mono space-y-1.5">
+            <div className="flex items-center gap-2">
+              <span className="h-2 w-2 rounded-full" style={{ backgroundColor: EVENT_COLORS[selectedEvent.category] }} />
+              <span className="text-slate-200 uppercase font-bold">{selectedEvent.category}</span>
+              <span className="text-slate-600">|</span>
+              <span className={selectedEvent.severity === 'critical' ? 'text-red-400 font-bold' : 'text-slate-400'}>{selectedEvent.severity}</span>
+              <span className="text-slate-600">|</span>
+              <span className="text-slate-400">{formatTimestamp(selectedEvent.timestamp)}</span>
+            </div>
+            <div>
+              <span className="text-[7px] text-slate-500 uppercase">Topic (Solace Event Mesh routing):</span>
+              <div className="text-[#00c895] mt-0.5">{selectedEvent.topic}</div>
+            </div>
+            <div>
+              <span className="text-[7px] text-slate-500 uppercase">Payload (delivered to subscribed agents):</span>
+              <div className="bg-slate-800/70 rounded p-2 text-slate-300 text-[9px] mt-0.5 border border-slate-700/50">
+                {Object.entries(selectedEvent.payload).map(([k, v]) => (
+                  <div key={k} className="flex gap-2"><span className="text-slate-500 min-w-[80px]">{k}:</span> <span className="text-white font-medium">{String(v)}</span></div>
+                ))}
+              </div>
+            </div>
+            <div className="text-[7px] text-slate-600 italic">
+              Routed to: Orchestrator Agent, {selectedEvent.category === 'iot' ? 'Predictive Agent, Digital Twin' : selectedEvent.category === 'logistics' ? 'Logistics Agent, Scheduling Agent' : 'Quality Agent, Maintenance Agent'}
             </div>
           </div>
         </div>

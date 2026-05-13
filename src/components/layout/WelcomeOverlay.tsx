@@ -41,15 +41,15 @@ export function WelcomeOverlay() {
                 <circle cx="20" cy="20" r="1.5" fill="white"/>
               </svg>
               <div>
-                <h2 className="text-base font-bold text-white">Solace Agent Mesh</h2>
-                <p className="text-[9px] text-slate-400">AI Agents Coordinating on the Solace Platform</p>
+                <h2 className="text-base font-bold text-white">Solace Agent+Event Mesh</h2>
+                <p className="text-[9px] text-slate-400">for Manufacturing</p>
               </div>
             </div>
             <button onClick={dismiss} className="text-slate-400 hover:text-white"><X className="h-4 w-4" /></button>
           </div>
 
           <p className="text-[12px] text-slate-300 mb-4 leading-relaxed">
-            <span className="text-[#00c895] font-semibold">Solace Agent Mesh</span> enables teams of AI agents to autonomously detect and resolve manufacturing disruptions in real-time — communicating via events on the Solace Platform.
+            The <span className="text-[#00c895] font-semibold">Solace Agent+Event Mesh</span> combines real-time event streaming with autonomous AI agents to detect and resolve manufacturing disruptions instantly — events flow through the mesh, agents react, coordinate, and resolve.
           </p>
 
           <div className="space-y-2.5 mb-5">

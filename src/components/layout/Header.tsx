@@ -31,8 +31,8 @@ export function Header() {
           <circle cx="20" cy="20" r="1.5" fill="white"/>
         </svg>
         <div>
-          <h1 className="text-sm font-bold text-white">Solace <span className="text-[#00c895]">Agent Mesh</span></h1>
-          <p className="text-[9px] text-slate-500">AI Agents on the Solace Platform</p>
+          <h1 className="text-sm font-bold text-white">Solace <span className="text-[#00c895]">Agent+Event Mesh</span></h1>
+          <p className="text-[9px] text-slate-500">for Manufacturing</p>
         </div>
       </div>
 
