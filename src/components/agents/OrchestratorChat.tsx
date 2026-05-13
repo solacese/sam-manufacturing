@@ -45,7 +45,16 @@ export function OrchestratorChat() {
         <button onClick={() => setOpen(false)} className="text-slate-500 hover:text-slate-300"><X className="h-3 w-3" /></button>
       </div>
       <div ref={scrollRef} className="flex-1 overflow-y-auto px-3 py-2 space-y-1.5 scrollbar-thin">
-        {messages.length === 0 && <p className="text-[9px] text-slate-500 italic">Ask about status, decisions, or what-if scenarios...</p>}
+        {messages.length === 0 && (
+          <div className="space-y-1">
+            <p className="text-[9px] text-slate-500 italic mb-2">Try asking:</p>
+            {['What is the current OEE?', 'What if we shut down line 3?', 'Which agents would handle a supplier delay?'].map(q => (
+              <button key={q} onClick={() => { setInput(q) }} className="block text-[9px] text-[#00c895]/70 hover:text-[#00c895] transition-colors text-left">
+                → {q}
+              </button>
+            ))}
+          </div>
+        )}
         {messages.map((m, i) => <div key={i} className="text-[10px] leading-relaxed"><span className={cn('font-bold', m.role === 'user' ? 'text-slate-400' : 'text-[#00c895]')}>{m.role === 'user' ? 'You' : 'Orchestrator'}:</span> <span className="text-slate-300">{m.content}</span></div>)}
         {loading && <div className="text-[9px] text-slate-500 flex items-center gap-1"><Loader2 className="h-3 w-3 animate-spin text-[#00c895]" />Thinking...</div>}
       </div>
