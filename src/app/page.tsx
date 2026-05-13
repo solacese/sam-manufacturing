@@ -49,11 +49,9 @@ export default function Home() {
           {/* TOP ROW: Flow center + Agent panel right */}
           <div className="flex-1 flex min-h-0">
             {/* CENTER: Flow */}
-            <div className="flex-1 flex flex-col p-4 gap-3 min-w-0 relative">
+            <div className="flex-1 flex flex-col px-4 py-3 gap-2 min-w-0 relative">
               <FlowBackground />
-              <div className="flex gap-2 items-center">
-                <div className="flex-1"><FlowSelector /></div>
-              </div>
+              <FlowSelector />
               <ScenarioGenerator />
               <ManufacturingFlowViz />
               <MeshHealth />
