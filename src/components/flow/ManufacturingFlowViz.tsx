@@ -35,17 +35,21 @@ export function ManufacturingFlowViz() {
   const flowStepStatuses = useSimulationStore((s) => s.flowStepStatuses)
 
   const [oee, setOee] = useState({ oee: 87.2, avail: 94.1, perf: 96.3, qual: 96.2 })
+  const [prevOee, setPrevOee] = useState({ oee: 87.2, avail: 94.1, perf: 96.3, qual: 96.2 })
   const errorCount = flowStepStatuses.filter(s => s === 'error').length
 
   useEffect(() => {
     const interval = setInterval(() => {
       const impact = errorCount * 3
-      setOee(prev => ({
-        oee: +(Math.max(40, 87.2 - impact + (Math.random() - 0.5) * 0.4)).toFixed(1),
-        avail: +(Math.max(50, 94.1 - impact * 1.2 + (Math.random() - 0.5) * 0.3)).toFixed(1),
-        perf: +(Math.max(60, 96.3 - impact * 0.8 + (Math.random() - 0.5) * 0.3)).toFixed(1),
-        qual: +(Math.max(70, 96.2 - impact * 0.5 + (Math.random() - 0.5) * 0.2)).toFixed(1),
-      }))
+      setOee(prev => {
+        setPrevOee(prev)
+        return {
+          oee: +(Math.max(40, 87.2 - impact + (Math.random() - 0.5) * 0.4)).toFixed(1),
+          avail: +(Math.max(50, 94.1 - impact * 1.2 + (Math.random() - 0.5) * 0.3)).toFixed(1),
+          perf: +(Math.max(60, 96.3 - impact * 0.8 + (Math.random() - 0.5) * 0.3)).toFixed(1),
+          qual: +(Math.max(70, 96.2 - impact * 0.5 + (Math.random() - 0.5) * 0.2)).toFixed(1),
+        }
+      })
     }, 2000)
     return () => clearInterval(interval)
   }, [errorCount])
@@ -62,10 +66,10 @@ export function ManufacturingFlowViz() {
         {isCascade && <span className="text-[8px] font-bold text-red-400 bg-red-500/10 border border-red-500/30 rounded px-1.5 py-0.5 animate-pulse">CASCADE FAILURE</span>}
         <span className="text-[9px] text-slate-500 font-mono">{selectedFlow.plant}/{selectedFlow.line}</span>
         <div className="ml-auto flex gap-3">
-          <MetricPill label="OEE" value={`${oee.oee}%`} accent={oee.oee > 80} warn={oee.oee <= 80} />
-          <MetricPill label="Avail" value={`${oee.avail}%`} accent={oee.avail > 85} warn={oee.avail <= 85} />
-          <MetricPill label="Perf" value={`${oee.perf}%`} accent={oee.perf > 90} warn={oee.perf <= 90} />
-          <MetricPill label="Qual" value={`${oee.qual}%`} accent={oee.qual > 90} warn={oee.qual <= 90} />
+          <MetricPill label="OEE" value={`${oee.oee}%`} accent={oee.oee > 80} warn={oee.oee <= 80} trend={oee.oee > prevOee.oee ? 'up' : oee.oee < prevOee.oee ? 'down' : 'stable'} />
+          <MetricPill label="Avail" value={`${oee.avail}%`} accent={oee.avail > 85} warn={oee.avail <= 85} trend={oee.avail > prevOee.avail ? 'up' : oee.avail < prevOee.avail ? 'down' : 'stable'} />
+          <MetricPill label="Perf" value={`${oee.perf}%`} accent={oee.perf > 90} warn={oee.perf <= 90} trend={oee.perf > prevOee.perf ? 'up' : oee.perf < prevOee.perf ? 'down' : 'stable'} />
+          <MetricPill label="Qual" value={`${oee.qual}%`} accent={oee.qual > 90} warn={oee.qual <= 90} trend={oee.qual > prevOee.qual ? 'up' : oee.qual < prevOee.qual ? 'down' : 'stable'} />
           <MetricPill label="Takt" value={selectedFlow.taktTime} />
           <MetricPill label="FPY" value={`${selectedFlow.firstPassYield.toFixed(1)}%`} accent />
         </div>
@@ -120,11 +124,13 @@ export function ManufacturingFlowViz() {
   )
 }
 
-function MetricPill({ label, value, accent, warn }: { label: string; value: string; accent?: boolean; warn?: boolean }) {
+function MetricPill({ label, value, accent, warn, trend }: { label: string; value: string; accent?: boolean; warn?: boolean; trend?: 'up' | 'down' | 'stable' }) {
   return (
     <span className="text-[9px] font-mono tabular-nums transition-colors duration-500">
       <span className="text-slate-500">{label} </span>
       <span className={cn(warn ? 'text-red-400 font-bold' : accent ? 'text-[#00c895] font-bold' : 'text-slate-200')}>{value}</span>
+      {trend === 'up' && <span className="text-[#00c895] ml-0.5">↑</span>}
+      {trend === 'down' && <span className="text-red-400 ml-0.5">↓</span>}
     </span>
   )
 }
