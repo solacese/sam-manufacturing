@@ -44,16 +44,27 @@ export function CustomDisruptionInput() {
     }
   }
 
+  const examples = ['port congestion delays shipment 3 weeks', 'coolant pump failure on CNC-7', 'supplier quality cert expired', 'demand spike from Airbus +40% orders']
+
   return (
     <div className="mb-3">
       <div className="flex items-center gap-2">
         <Sparkles className="h-3 w-3 text-[#00c895]" />
-        <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">AI-Powered Disruption</span>
+        <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">AI-Powered Event Generation</span>
         {error && <span className="text-[9px] text-red-400 ml-2">{error}</span>}
+        {!prompt && !loading && (
+          <div className="ml-auto flex gap-1">
+            {examples.slice(0, 2).map(ex => (
+              <button key={ex} onClick={() => setPrompt(ex)} className="text-[8px] text-slate-600 hover:text-[#00c895] transition-colors truncate max-w-[120px]">
+                {ex}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
       <div className="flex items-center gap-2 mt-1.5">
         <input type="text" value={prompt} onChange={(e) => setPrompt(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && handleGenerate()}
-          placeholder="Describe any scenario... (e.g. 'sand contamination in the CNC trimming station')" disabled={!selectedFlow || loading}
+          placeholder="Describe any supply chain event... (e.g. 'port congestion delays titanium shipment')" disabled={!selectedFlow || loading}
           className="flex-1 rounded-lg border border-slate-700 bg-slate-800/60 px-3 py-2 text-[11px] text-slate-200 placeholder:text-slate-500 outline-none focus:border-[#00c895] focus:ring-2 focus:ring-[#00c895]/20 disabled:opacity-40 transition-all" />
         <button onClick={handleGenerate} disabled={!prompt.trim() || !selectedFlow || loading}
           className="flex items-center gap-1.5 rounded-lg bg-[#00c895] hover:bg-[#00ad84] px-4 py-2 text-[10px] font-semibold text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-95 shadow-lg shadow-[#00c895]/20">
