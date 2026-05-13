@@ -62,10 +62,10 @@ export function ManufacturingFlowViz() {
         {isCascade && <span className="text-[8px] font-bold text-red-400 bg-red-500/10 border border-red-500/30 rounded px-1.5 py-0.5 animate-pulse">CASCADE FAILURE</span>}
         <span className="text-[9px] text-slate-500 font-mono">{selectedFlow.plant}/{selectedFlow.line}</span>
         <div className="ml-auto flex gap-3">
-          <MetricPill label="OEE" value={`${oee.oee}%`} accent />
-          <MetricPill label="Avail" value={`${oee.avail}%`} />
-          <MetricPill label="Perf" value={`${oee.perf}%`} />
-          <MetricPill label="Qual" value={`${oee.qual}%`} />
+          <MetricPill label="OEE" value={`${oee.oee}%`} accent={oee.oee > 80} warn={oee.oee <= 80} />
+          <MetricPill label="Avail" value={`${oee.avail}%`} accent={oee.avail > 85} warn={oee.avail <= 85} />
+          <MetricPill label="Perf" value={`${oee.perf}%`} accent={oee.perf > 90} warn={oee.perf <= 90} />
+          <MetricPill label="Qual" value={`${oee.qual}%`} accent={oee.qual > 90} warn={oee.qual <= 90} />
           <MetricPill label="Takt" value={selectedFlow.taktTime} />
           <MetricPill label="FPY" value={`${selectedFlow.firstPassYield.toFixed(1)}%`} accent />
         </div>
@@ -117,11 +117,11 @@ export function ManufacturingFlowViz() {
   )
 }
 
-function MetricPill({ label, value, accent }: { label: string; value: string; accent?: boolean }) {
+function MetricPill({ label, value, accent, warn }: { label: string; value: string; accent?: boolean; warn?: boolean }) {
   return (
-    <span className="text-[9px] font-mono">
+    <span className="text-[9px] font-mono tabular-nums transition-colors duration-500">
       <span className="text-slate-500">{label} </span>
-      <span className={accent ? 'text-[#00c895] font-bold' : 'text-slate-200'}>{value}</span>
+      <span className={cn(warn ? 'text-red-400 font-bold' : accent ? 'text-[#00c895] font-bold' : 'text-slate-200')}>{value}</span>
     </span>
   )
 }

@@ -11,6 +11,15 @@ export function WelcomeOverlay() {
     if (!dismissed) setShow(true)
   }, [])
 
+  useEffect(() => {
+    if (!show) return
+    function handleKey(e: KeyboardEvent) {
+      if (e.key === 'Enter' || e.key === 'Escape') dismiss()
+    }
+    window.addEventListener('keydown', handleKey)
+    return () => window.removeEventListener('keydown', handleKey)
+  }, [show])
+
   function dismiss() {
     setShow(false)
     sessionStorage.setItem('sam-welcome-dismissed', '1')
