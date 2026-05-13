@@ -57,7 +57,7 @@ export function ManufacturingFlowViz() {
           const metrics = step.metrics || {}
           const metricEntries = Object.entries(metrics).slice(0, 2)
           return (
-            <div key={step.id} className={cn('relative rounded-lg border p-2.5 transition-all duration-300', statusStyles[status])}>
+            <div key={step.id} title={step.description} className={cn('relative rounded-lg border p-2.5 transition-all duration-300 group', statusStyles[status])}>
               <div className="flex items-center gap-1.5 mb-1.5">
                 <span className={cn('h-2 w-2 rounded-full', dotColors[status])} />
                 <span className="text-[10px] font-bold text-slate-200 truncate">{step.name}</span>
@@ -69,8 +69,11 @@ export function ManufacturingFlowViz() {
                   <MiniGauge value={val as number} max={key === 'temperature' ? 300 : key === 'efficiency' || key === 'passRate' ? 100 : 1000} color={status === 'error' ? '#ef4444' : '#00c895'} />
                 </div>
               ))}
-              <div className="absolute -top-1 -left-1 h-4 w-4 rounded-full bg-slate-900 border border-[#00c895] flex items-center justify-center">
-                <span className="text-[7px] font-bold text-[#00c895]">{idx + 1}</span>
+              {status === 'error' && (
+                <div className="mt-1 text-[8px] font-bold text-red-400 uppercase tracking-wider">DISRUPTED</div>
+              )}
+              <div className="absolute -top-1 -left-1 h-4 w-4 rounded-full bg-slate-900 border flex items-center justify-center" style={{ borderColor: status === 'error' ? '#ef4444' : '#00c895' }}>
+                <span className="text-[7px] font-bold" style={{ color: status === 'error' ? '#ef4444' : '#00c895' }}>{idx + 1}</span>
               </div>
             </div>
           )
