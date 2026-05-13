@@ -1,4 +1,4 @@
-export type EventCategory = 'iot' | 'mes' | 'erp' | 'agent' | 'disruption'
+export type EventCategory = 'iot' | 'mes' | 'erp' | 'agent' | 'disruption' | 'logistics' | 'supplier'
 
 export interface SolaceEvent {
   id: string

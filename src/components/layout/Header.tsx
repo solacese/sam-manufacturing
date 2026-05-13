@@ -31,8 +31,8 @@ export function Header() {
           <circle cx="20" cy="20" r="1.5" fill="white"/>
         </svg>
         <div>
-          <h1 className="text-sm font-bold text-white">Solace <span className="text-[#00c895]">Agent Mesh</span></h1>
-          <p className="text-[9px] text-slate-500">Manufacturing Intelligence Platform</p>
+          <h1 className="text-sm font-bold text-white">Solace <span className="text-[#00c895]">PubSub+</span></h1>
+          <p className="text-[9px] text-slate-500">Real-Time Manufacturing & Supply Chain</p>
         </div>
       </div>
 
@@ -53,23 +53,23 @@ export function Header() {
 
         <span className="flex items-center gap-1.5 font-mono">
           <Wifi className="h-3 w-3 text-[#00c895]" />
-          PubSub+
+          Event Mesh
           <span className="h-2 w-2 rounded-full bg-[#00c895] animate-pulse" />
           <span className="text-slate-600">|</span>
-          <span className="tabular-nums text-slate-400">{isResolving ? '12' : '8'}ms latency</span>
+          <span className="tabular-nums text-slate-400">{isResolving ? '12' : '8'}ms</span>
         </span>
 
         {isResolving && (
           <span className="flex items-center gap-1.5 bg-amber-500/10 border border-amber-500/30 rounded-full px-2.5 py-0.5 text-amber-300 font-semibold">
             <Zap className="h-3 w-3" />
-            {activeDisruptions.length} disruption{activeDisruptions.length > 1 ? 's' : ''} · {agentMessages.length} A2A msgs
+            {activeDisruptions.length} event{activeDisruptions.length > 1 ? 's' : ''} · {agentMessages.length} A2A
           </span>
         )}
 
-        <button onClick={reset} className="flex items-center gap-1 text-slate-500 hover:text-white transition-colors" title="Reset demo">
+        <button onClick={reset} className="text-slate-500 hover:text-white transition-colors" title="Reset">
           <RotateCcw className="h-3 w-3" />
         </button>
-        <button onClick={() => document.documentElement.requestFullscreen?.()} className="flex items-center gap-1 text-slate-500 hover:text-white transition-colors" title="Fullscreen">
+        <button onClick={() => document.documentElement.requestFullscreen?.()} className="text-slate-500 hover:text-white transition-colors" title="Fullscreen">
           <Maximize2 className="h-3 w-3" />
         </button>
       </div>

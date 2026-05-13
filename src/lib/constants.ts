@@ -6,6 +6,8 @@ export const EVENT_COLORS: Record<EventCategory, string> = {
   erp: '#fbbf24',
   agent: '#00c895',
   disruption: '#ef4444',
+  logistics: '#f97316',
+  supplier: '#06b6d4',
 }
 
 export const EVENT_LABELS: Record<EventCategory, string> = {
@@ -14,6 +16,8 @@ export const EVENT_LABELS: Record<EventCategory, string> = {
   erp: 'ERP',
   agent: 'Agent',
   disruption: 'Disruption',
+  logistics: 'Logistics',
+  supplier: 'Supplier',
 }
 
 export const AGENT_COLORS: Record<AgentRole, string> = {

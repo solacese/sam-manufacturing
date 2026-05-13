@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react'
 import { useSimulationStore } from '@/store/simulation-store'
-import { iotTemplates, mesTemplates, erpTemplates } from '@/data/event-templates'
+import { iotTemplates, mesTemplates, erpTemplates, logisticsTemplates, supplierTemplates } from '@/data/event-templates'
 import { generateId, pick } from '@/lib/utils'
 import { PLANTS, EVENT_INTERVAL_IOT, EVENT_INTERVAL_MES, EVENT_INTERVAL_ERP } from '@/lib/constants'
 import { SolaceEvent } from '@/types'
@@ -21,7 +21,7 @@ export function useEventStream() {
       return {
         id: generateId(),
         timestamp: Date.now(),
-        topic: `manufacturing/${plant}/${line}/${template.topicSuffix}`,
+        topic: `solace/${plant}/${line}/${template.topicSuffix}`,
         category: template.category,
         payload: template.payloadGenerator(),
         severity: template.severity,
@@ -34,13 +34,21 @@ export function useEventStream() {
 
     const mesInterval = setInterval(() => {
       addEvent(createEvent(mesTemplates))
-    }, EVENT_INTERVAL_MES + Math.random() * 2000)
+    }, EVENT_INTERVAL_MES + Math.random() * 1000)
 
     const erpInterval = setInterval(() => {
       addEvent(createEvent(erpTemplates))
-    }, EVENT_INTERVAL_ERP + Math.random() * 3000)
+    }, EVENT_INTERVAL_ERP + Math.random() * 2000)
 
-    intervalsRef.current = [iotInterval, mesInterval, erpInterval]
+    const logisticsInterval = setInterval(() => {
+      addEvent(createEvent(logisticsTemplates))
+    }, 800 + Math.random() * 1200)
+
+    const supplierInterval = setInterval(() => {
+      addEvent(createEvent(supplierTemplates))
+    }, 1500 + Math.random() * 2000)
+
+    intervalsRef.current = [iotInterval, mesInterval, erpInterval, logisticsInterval, supplierInterval]
 
     return () => {
       intervalsRef.current.forEach(clearInterval)

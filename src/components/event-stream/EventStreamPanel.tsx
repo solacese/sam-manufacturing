@@ -14,12 +14,14 @@ const filterOptions: { key: EventCategory; label: string }[] = [
   { key: 'iot', label: 'IoT' },
   { key: 'mes', label: 'MES' },
   { key: 'erp', label: 'ERP' },
+  { key: 'logistics', label: 'LOG' },
+  { key: 'supplier', label: 'SUP' },
 ]
 
 export function EventStreamPanel() {
   const events = useSimulationStore((s) => s.events)
   const [paused, setPaused] = useState(false)
-  const [filters, setFilters] = useState<Set<EventCategory>>(new Set(['iot', 'mes', 'erp', 'agent', 'disruption']))
+  const [filters, setFilters] = useState<Set<EventCategory>>(new Set(['iot', 'mes', 'erp', 'agent', 'disruption', 'logistics', 'supplier']))
   const [selectedEvent, setSelectedEvent] = useState<SolaceEvent | null>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
   const frozenRef = useRef<SolaceEvent[]>([])
