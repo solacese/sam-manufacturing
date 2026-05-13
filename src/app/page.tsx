@@ -6,6 +6,7 @@ import { EventStreamPanel } from '@/components/event-stream/EventStreamPanel'
 import { FlowSelector } from '@/components/flow/FlowSelector'
 import { ScenarioGenerator } from '@/components/flow/ScenarioGenerator'
 import { ManufacturingFlowViz } from '@/components/flow/ManufacturingFlowViz'
+import { MeshHealth } from '@/components/flow/MeshHealth'
 import { DisruptionInjector } from '@/components/disruption/DisruptionInjector'
 import { CustomDisruptionInput } from '@/components/disruption/CustomDisruptionInput'
 import { AgentWorkspacePanel } from '@/components/agents/AgentWorkspacePanel'
@@ -49,6 +50,7 @@ export default function Home() {
               </div>
               <ScenarioGenerator />
               <ManufacturingFlowViz />
+              <MeshHealth />
             </div>
 
             {/* RIGHT: Agent Resolution */}

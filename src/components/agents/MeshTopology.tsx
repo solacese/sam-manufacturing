@@ -22,7 +22,7 @@ const connections: [number, number][] = [
 
 export function MeshTopology({ active }: { active: boolean }) {
   return (
-    <svg viewBox="0 0 100 100" className="w-full h-[100px]" preserveAspectRatio="xMidYMid meet">
+    <svg viewBox="0 0 100 100" className="w-full h-[90px]" preserveAspectRatio="xMidYMid meet">
       {/* Connections */}
       {connections.map(([from, to], i) => (
         <line
