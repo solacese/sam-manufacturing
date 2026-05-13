@@ -26,7 +26,14 @@ export default function Home() {
 
   const selectFlow = useSimulationStore((s) => s.selectFlow)
   const selectedFlow = useSimulationStore((s) => s.selectedFlow)
+  const isResolving = useSimulationStore((s) => s.isResolving)
   const [view, setView] = useState<'production' | 'supply-chain'>('production')
+
+  useEffect(() => {
+    document.title = isResolving
+      ? '⚠ Resolving — Solace Agent+Event Mesh'
+      : 'Solace Agent+Event Mesh for Manufacturing'
+  }, [isResolving])
 
   useEffect(() => {
     if (!selectedFlow) {

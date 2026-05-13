@@ -88,7 +88,7 @@ export function ManufacturingFlowViz() {
         <span className="text-slate-500 font-medium">Finished Goods</span>
       </div>
 
-      <div className="flex-1 grid grid-cols-4 gap-2 content-start">
+      <div className="flex-1 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 content-start overflow-y-auto">
         {selectedFlow.steps.map((step, idx) => {
           const status = flowStepStatuses[idx] || 'running'
           const metrics = step.metrics || {}
