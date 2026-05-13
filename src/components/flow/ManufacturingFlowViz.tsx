@@ -51,6 +51,15 @@ export function ManufacturingFlowViz() {
         </div>
       </div>
 
+      {/* Flow direction indicator */}
+      <div className="flex items-center gap-1 mb-1 text-[8px] text-slate-600">
+        <span>Raw Materials</span>
+        <span className="flex-1 border-t border-dashed border-slate-700 mx-1" />
+        <span>→ Processing → Assembly → Quality →</span>
+        <span className="flex-1 border-t border-dashed border-slate-700 mx-1" />
+        <span>Finished Goods</span>
+      </div>
+
       <div className="flex-1 grid grid-cols-4 gap-2 content-start">
         {selectedFlow.steps.map((step, idx) => {
           const status = flowStepStatuses[idx] || 'running'

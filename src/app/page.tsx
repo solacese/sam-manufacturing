@@ -30,7 +30,7 @@ export default function Home() {
   }, [selectedFlow, selectFlow])
 
   return (
-    <div className="h-screen w-screen overflow-hidden flex flex-col">
+    <div className="h-screen w-screen overflow-hidden flex flex-col bg-[#0b1120]">
       <Header />
 
       <div className="flex-1 flex min-h-0">
