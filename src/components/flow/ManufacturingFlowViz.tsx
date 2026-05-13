@@ -8,7 +8,7 @@ const statusStyles: Record<FlowStepStatus, string> = {
   idle: 'bg-slate-800/50 border-slate-700',
   running: 'bg-slate-800/80 border-[#00c895]/40',
   warning: 'bg-amber-950/30 border-amber-500/40',
-  error: 'bg-red-950/40 border-red-500/60 shadow-[0_0_12px_rgba(220,38,38,0.3)]',
+  error: 'bg-red-950/40 border-red-500/60 animate-error-pulse',
   complete: 'bg-cyan-950/30 border-cyan-500/40',
 }
 
@@ -53,7 +53,7 @@ export function ManufacturingFlowViz() {
           const metrics = step.metrics || {}
           const metricEntries = Object.entries(metrics).slice(0, 2)
           return (
-            <div key={step.id} className={cn('relative rounded-lg border p-2.5 transition-all duration-300', statusStyles[status], status === 'error' && 'animate-pulse')}>
+            <div key={step.id} className={cn('relative rounded-lg border p-2.5 transition-all duration-300', statusStyles[status])}>
               <div className="flex items-center gap-1.5 mb-1.5">
                 <span className={cn('h-2 w-2 rounded-full', dotColors[status])} />
                 <span className="text-[10px] font-bold text-slate-200 truncate">{step.name}</span>

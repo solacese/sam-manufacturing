@@ -4,6 +4,7 @@ import { useSimulationStore } from '@/store/simulation-store'
 import { AgentTimeline } from './AgentTimeline'
 import { ResolutionSummary } from './ResolutionSummary'
 import { OrchestratorChat } from './OrchestratorChat'
+import { MeshTopology } from './MeshTopology'
 import { Network, Zap, AlertCircle, CheckCircle2 } from 'lucide-react'
 import { AGENT_NAMES, AGENT_COLORS } from '@/lib/constants'
 import { AgentRole, DisruptionCategory } from '@/types'
@@ -54,20 +55,18 @@ export function AgentWorkspacePanel() {
         </div>
       )}
 
+      {/* Mesh topology visualization */}
+      {(hasDisruptions || agentMessages.length === 0) && (
+        <div className="flex-shrink-0 border-b border-slate-800 px-3 py-1">
+          <MeshTopology active={isResolving} />
+        </div>
+      )}
+
       <div className="flex-1 overflow-y-auto px-3 py-2 scrollbar-thin">
         {!hasDisruptions && agentMessages.length === 0 && (
           <div className="flex flex-col items-center justify-center h-full text-center">
-            <Zap className="h-5 w-5 text-slate-600 mb-2" />
             <p className="text-[11px] font-medium text-slate-400 mb-1">Agents Standing By</p>
-            <p className="text-[9px] text-slate-500 mb-3">Inject disruptions to activate the mesh</p>
-            <div className="grid grid-cols-3 gap-1 w-full">
-              {agentRoles.map((role) => (
-                <div key={role} className="flex items-center gap-1.5 rounded bg-slate-800/50 px-2 py-1">
-                  <span className="h-2 w-2 rounded-full flex-shrink-0" style={{ backgroundColor: AGENT_COLORS[role] }} />
-                  <span className="text-[8px] text-slate-400 truncate">{AGENT_NAMES[role].replace(' Agent', '')}</span>
-                </div>
-              ))}
-            </div>
+            <p className="text-[9px] text-slate-500">Inject disruptions to activate the mesh</p>
           </div>
         )}
         {agentMessages.length > 0 && <AgentTimeline messages={agentMessages} />}

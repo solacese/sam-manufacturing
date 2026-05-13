@@ -25,7 +25,7 @@ export function ScenarioGenerator() {
   return (
     <div className="flex items-center gap-2">
       <input type="text" value={prompt} onChange={(e) => setPrompt(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && handleGenerate()}
-        placeholder="Generate custom flow... (e.g. 'EV battery cell manufacturing for BMW')" disabled={loading}
+        placeholder="AI: Generate a custom production flow... (e.g. 'Airbus A350 wing spar manufacturing')" disabled={loading}
         className="flex-1 rounded-lg border border-slate-700 bg-slate-800/50 px-3 py-1.5 text-[11px] text-slate-200 placeholder:text-slate-500 outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500/30 disabled:opacity-40 transition-all" />
       <button onClick={handleGenerate} disabled={!prompt.trim() || loading}
         className="flex items-center gap-1.5 rounded-lg bg-violet-600 hover:bg-violet-500 px-3 py-1.5 text-[10px] font-semibold text-white transition-all disabled:opacity-30 active:scale-95">

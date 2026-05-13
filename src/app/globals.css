@@ -22,8 +22,44 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes error-pulse {
+  0%, 100% { box-shadow: 0 0 4px rgba(220, 38, 38, 0.3); }
+  50% { box-shadow: 0 0 16px rgba(220, 38, 38, 0.6), 0 0 32px rgba(220, 38, 38, 0.2); }
+}
+
+@keyframes solace-pulse {
+  0%, 100% { box-shadow: 0 0 4px rgba(0, 200, 149, 0.2); }
+  50% { box-shadow: 0 0 12px rgba(0, 200, 149, 0.4); }
+}
+
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .animate-fade-in {
   animation: fade-in 0.25s ease-out forwards;
+}
+
+.animate-slide-in {
+  animation: slide-in-left 0.3s ease-out forwards;
+}
+
+.animate-error-pulse {
+  animation: error-pulse 1.5s ease-in-out infinite;
+}
+
+.animate-solace-pulse {
+  animation: solace-pulse 2s ease-in-out infinite;
+}
+
+.animate-count-up {
+  animation: count-up 0.3s ease-out;
 }
 
 .scrollbar-thin {

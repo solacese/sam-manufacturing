@@ -1,12 +1,14 @@
 'use client'
 
 import { useSimulationStore } from '@/store/simulation-store'
-import { Activity, Wifi, Network } from 'lucide-react'
+import { Activity, Wifi, Network, Zap } from 'lucide-react'
 import Link from 'next/link'
 
 export function Header() {
   const events = useSimulationStore((s) => s.events)
   const isResolving = useSimulationStore((s) => s.isResolving)
+  const activeDisruptions = useSimulationStore((s) => s.activeDisruptions)
+  const agentMessages = useSimulationStore((s) => s.agentMessages)
 
   return (
     <header className="h-12 flex-shrink-0 flex items-center justify-between border-b border-slate-800 bg-[#0f1729] px-5">
@@ -19,16 +21,34 @@ export function Header() {
         </svg>
         <div>
           <h1 className="text-sm font-bold text-white">Solace <span className="text-[#00c895]">Agent Mesh</span></h1>
-          <p className="text-[9px] text-slate-400">Manufacturing Intelligence Platform</p>
+          <p className="text-[9px] text-slate-500">Manufacturing Intelligence Platform</p>
         </div>
       </div>
-      <div className="flex items-center gap-5 text-[11px] text-slate-400">
-        <Link href="/architecture" className="flex items-center gap-1.5 text-[#00c895] hover:text-white transition-colors font-medium">
+
+      <div className="flex items-center gap-4 text-[10px] text-slate-400">
+        <Link href="/architecture" className="flex items-center gap-1.5 text-[#00c895] hover:text-white transition-colors font-semibold text-[10px]">
           <Network className="h-3 w-3" />Architecture
         </Link>
-        <span className="flex items-center gap-1.5"><Activity className="h-3 w-3 text-[#00c895]" /><span className="font-mono">{events.length > 0 ? '25' : '0'} ev/s</span></span>
-        <span className="flex items-center gap-1.5"><Wifi className="h-3 w-3 text-[#00c895]" /><span className="font-mono">PubSub+ Connected</span><span className="h-2 w-2 rounded-full bg-[#00c895]" /></span>
-        {isResolving && <span className="flex items-center gap-1.5 text-amber-400 font-semibold"><span className="h-2 w-2 rounded-full bg-amber-400 animate-pulse" />Agents Active</span>}
+
+        <div className="h-4 w-px bg-slate-700" />
+
+        <span className="flex items-center gap-1.5 font-mono">
+          <Activity className="h-3 w-3 text-[#00c895]" />
+          <span className="tabular-nums">{events.length > 0 ? '25' : '0'} ev/s</span>
+        </span>
+
+        <span className="flex items-center gap-1.5 font-mono">
+          <Wifi className="h-3 w-3 text-[#00c895]" />
+          PubSub+ Connected
+          <span className="h-2 w-2 rounded-full bg-[#00c895] animate-pulse" />
+        </span>
+
+        {isResolving && (
+          <span className="flex items-center gap-1.5 bg-amber-500/10 border border-amber-500/30 rounded-full px-2.5 py-0.5 text-amber-300 font-semibold">
+            <Zap className="h-3 w-3" />
+            {activeDisruptions.length} disruption{activeDisruptions.length > 1 ? 's' : ''} · {agentMessages.length} A2A msgs
+          </span>
+        )}
       </div>
     </header>
   )
