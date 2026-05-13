@@ -174,6 +174,31 @@ export default function ArchitecturePage() {
             </div>
           </div>
 
+          {/* Deployment Topology */}
+          <div className="rounded-xl border border-slate-700 bg-slate-900/50 p-4">
+            <h3 className="text-xs font-bold text-white mb-3">Hybrid Deployment</h3>
+            <div className="grid grid-cols-3 gap-2">
+              <div className="rounded-lg border border-slate-700/50 bg-slate-800/30 p-2.5 text-center">
+                <div className="text-[10px] font-bold text-[#00c895] mb-1">On-Premises</div>
+                <div className="text-[8px] text-slate-400">Plant floor brokers</div>
+                <div className="text-[8px] text-slate-400">MES/SCADA integration</div>
+                <div className="text-[8px] text-slate-400">Edge IoT gateways</div>
+              </div>
+              <div className="rounded-lg border border-slate-700/50 bg-slate-800/30 p-2.5 text-center">
+                <div className="text-[10px] font-bold text-[#00c895] mb-1">Cloud</div>
+                <div className="text-[8px] text-slate-400">Agent Mesh runtime</div>
+                <div className="text-[8px] text-slate-400">AI/ML inference</div>
+                <div className="text-[8px] text-slate-400">Analytics & dashboards</div>
+              </div>
+              <div className="rounded-lg border border-slate-700/50 bg-slate-800/30 p-2.5 text-center">
+                <div className="text-[10px] font-bold text-[#00c895] mb-1">Edge</div>
+                <div className="text-[8px] text-slate-400">Local filtering</div>
+                <div className="text-[8px] text-slate-400">Protocol translation</div>
+                <div className="text-[8px] text-slate-400">Low-latency response</div>
+              </div>
+            </div>
+          </div>
+
           {/* Use Cases */}
           <div className="rounded-xl border border-slate-700 bg-slate-900/50 p-4">
             <h3 className="text-xs font-bold text-white mb-3">Enterprise Use Cases</h3>
