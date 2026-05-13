@@ -83,8 +83,15 @@ export function EventStreamPanel() {
               <span className="text-slate-400">{formatTimestamp(selectedEvent.timestamp)}</span>
             </div>
             <div>
-              <span className="text-[7px] text-slate-500 uppercase">Topic (Solace Event Mesh routing):</span>
-              <div className="text-[#00c895] mt-0.5">{selectedEvent.topic}</div>
+              <span className="text-[7px] text-slate-500 uppercase">Topic (Event Mesh dynamic routing):</span>
+              <div className="mt-0.5">
+                {selectedEvent.topic.split('/').map((seg, i, arr) => (
+                  <span key={i}>
+                    <span className={i === arr.length - 1 ? 'text-[#00c895] font-bold' : i === 0 ? 'text-slate-400' : 'text-slate-300'}>{seg}</span>
+                    {i < arr.length - 1 && <span className="text-slate-600">/</span>}
+                  </span>
+                ))}
+              </div>
             </div>
             <div>
               <span className="text-[7px] text-slate-500 uppercase">Payload (delivered to subscribed agents):</span>

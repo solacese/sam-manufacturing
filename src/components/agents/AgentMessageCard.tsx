@@ -63,6 +63,9 @@ export const AgentMessageCard = memo(function AgentMessageCard({ message, index 
           )}
         </div>
         <p className="text-[9px] text-slate-300 leading-relaxed line-clamp-3">{message.content}</p>
+        <div className="mt-0.5 text-[7px] text-slate-600 font-mono truncate">
+          solace/agent-mesh/{message.fromAgent}/{message.type}
+        </div>
       </div>
     </div>
   )
