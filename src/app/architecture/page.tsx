@@ -80,7 +80,13 @@ export default function ArchitecturePage() {
         {/* Left: Architecture */}
         <div className="space-y-6">
           {/* Solace Event Mesh - Central */}
-          <div className="rounded-2xl border-2 border-[#00c895]/40 bg-[#00c895]/5 p-6 relative">
+          <div className="rounded-2xl border-2 border-[#00c895]/40 bg-[#00c895]/5 p-6 relative overflow-hidden">
+            {/* Animated background particles */}
+            <div className="absolute inset-0 pointer-events-none">
+              {[...Array(5)].map((_, i) => (
+                <div key={i} className="absolute h-1 w-1 rounded-full bg-[#00c895]/40" style={{ left: `${10 + i * 20}%`, top: `${20 + i * 15}%`, animation: `flow-particle ${3 + i * 0.5}s linear infinite`, animationDelay: `${i * 0.6}s` }} />
+              ))}
+            </div>
             <div className="absolute -top-3 left-6 bg-[#0b1120] px-3">
               <span className="text-sm font-bold text-[#00c895]">Solace PubSub+ Event Mesh</span>
             </div>

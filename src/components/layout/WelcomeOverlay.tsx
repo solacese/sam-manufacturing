@@ -19,8 +19,9 @@ export function WelcomeOverlay() {
   if (!show) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm animate-fade-in">
-      <div className="bg-[#0f1729] border border-slate-700 rounded-2xl p-6 max-w-md shadow-2xl shadow-[#00c895]/10">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md animate-fade-in">
+      <div className="bg-[#0f1729] border border-[#00c895]/30 rounded-2xl p-6 max-w-md shadow-2xl shadow-[#00c895]/20 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle, #00c895 1px, transparent 1px)', backgroundSize: '20px 20px' }} />
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
             <svg width="24" height="24" viewBox="0 0 40 40" fill="none">
