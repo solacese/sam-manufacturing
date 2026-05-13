@@ -43,7 +43,7 @@ const plants = [
 
 export default function ArchitecturePage() {
   const [selectedSystem, setSelectedSystem] = useState<string | null>(null)
-  const [hoveredAgent, setHoveredAgent] = useState<string | null>(null)
+  const [hoveredAgent, setHoveredAgent] = useState<AgentRole | null>(null)
   const [eventCount, setEventCount] = useState(142857)
 
   useEffect(() => {
