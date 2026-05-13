@@ -33,6 +33,12 @@ export function CustomDisruptionInput() {
       if (!res.ok) throw new Error(`API error ${res.status}`)
       const disruption: Disruption = await res.json()
       if (!disruption.resolutionScript) disruption.resolutionScript = []
+      if (!disruption.affectedSteps || disruption.affectedSteps.length === 0) {
+        disruption.affectedSteps = [Math.floor(Math.random() * (selectedFlow?.steps.length || 4))]
+      }
+      if (!disruption.kpis) {
+        disruption.kpis = { timeToDetect: '< 500ms', timeToResolve: '2 hours', costImpact: '€8,500', productionRecovery: '94%', unitsAffected: 12 }
+      }
       disruption.id = `dis-ai-${Date.now()}`
       injectDisruption(disruption)
       setPrompt('')

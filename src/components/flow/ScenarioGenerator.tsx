@@ -19,8 +19,19 @@ export function ScenarioGenerator() {
       if (!res.ok) throw new Error('Failed')
       const data = await res.json()
       if (data.flow) {
-        setStatus(`Created: ${data.flow.category} (${data.flow.steps?.length || 0} steps)`)
-        selectFlow(data.flow)
+        const flow = data.flow
+        if (flow.steps) {
+          flow.steps = flow.steps.map((s: Record<string, unknown>, i: number) => ({
+            ...s,
+            id: s.id || `step-gen-${i}`,
+            status: s.status || 'running',
+            metrics: s.metrics || { throughput: Math.round(Math.random() * 500 + 50), efficiency: Math.round(85 + Math.random() * 14) },
+          }))
+        }
+        if (!flow.firstPassYield) flow.firstPassYield = 95 + Math.random() * 4
+        if (!flow.taktTime) flow.taktTime = flow.cycleTime || '30 min'
+        setStatus(`Created: ${flow.category} (${flow.steps?.length || 0} steps)`)
+        selectFlow(flow)
       }
       setPrompt('')
       setTimeout(() => setStatus(''), 4000)
