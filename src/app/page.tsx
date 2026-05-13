@@ -73,6 +73,9 @@ export default function Home() {
           <div className="flex-shrink-0 border-t border-slate-800 bg-[#0f1729] px-4 py-2.5">
             <CustomDisruptionInput />
             <DisruptionInjector />
+            <div className="flex justify-end mt-1">
+              <span className="text-[7px] text-slate-700 font-mono">solace.com/agent-mesh</span>
+            </div>
           </div>
         </div>
       </div>

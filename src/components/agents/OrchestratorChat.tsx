@@ -48,7 +48,10 @@ export function OrchestratorChat() {
         {messages.length === 0 && (
           <div className="space-y-1">
             <p className="text-[9px] text-slate-500 italic mb-2">Try asking:</p>
-            {['What is the current OEE?', 'What if we shut down line 3?', 'Which agents would handle a supplier delay?'].map(q => (
+            {(activeDisruptions.length > 0
+              ? ['What caused this disruption?', 'How are the agents resolving it?', 'What is the estimated recovery time?']
+              : ['What is the current OEE?', 'What if we shut down line 3?', 'Which agents would handle a supplier delay?']
+            ).map(q => (
               <button key={q} onClick={() => { setInput(q) }} className="block text-[9px] text-[#00c895]/70 hover:text-[#00c895] transition-colors text-left">
                 → {q}
               </button>

@@ -106,6 +106,9 @@ export function ManufacturingFlowViz() {
               {status === 'error' && (
                 <div className="mt-1 text-[8px] font-bold text-red-400 uppercase tracking-wider">DISRUPTED</div>
               )}
+              {status === 'complete' && (
+                <div className="mt-1 text-[8px] font-bold text-cyan-400 uppercase tracking-wider animate-fade-in">RECOVERED</div>
+              )}
               <div className="absolute -top-1 -left-1 h-4 w-4 rounded-full bg-slate-900 border flex items-center justify-center" style={{ borderColor: status === 'error' ? '#ef4444' : '#00c895' }}>
                 <span className="text-[7px] font-bold" style={{ color: status === 'error' ? '#ef4444' : '#00c895' }}>{idx + 1}</span>
               </div>
