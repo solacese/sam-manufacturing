@@ -34,7 +34,7 @@ export function Header() {
 
         <span className="flex items-center gap-1.5 font-mono">
           <Activity className="h-3 w-3 text-[#00c895]" />
-          <span className="tabular-nums">{events.length > 0 ? '25' : '0'} ev/s</span>
+          <span className="tabular-nums">{events.length.toLocaleString()} events</span>
         </span>
 
         <span className="flex items-center gap-1.5 font-mono">
