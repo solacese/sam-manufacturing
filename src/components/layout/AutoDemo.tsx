@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useCallback } from 'react'
+import { useState, useRef, useCallback, useEffect } from 'react'
 import { useSimulationStore } from '@/store/simulation-store'
 import { disruptions } from '@/data/disruption-scenarios'
 import { getAllFlows } from '@/data/flow-generator'
@@ -10,7 +10,9 @@ import { cn } from '@/lib/cn'
 export function AutoDemo() {
   const [running, setRunning] = useState(false)
   const [step, setStep] = useState('')
+  const [elapsed, setElapsed] = useState(0)
   const timeoutsRef = useRef<NodeJS.Timeout[]>([])
+  const timerRef = useRef<NodeJS.Timeout | null>(null)
   const selectFlow = useSimulationStore((s) => s.selectFlow)
   const injectDisruption = useSimulationStore((s) => s.injectDisruption)
   const reset = useSimulationStore((s) => s.reset)
@@ -18,13 +20,23 @@ export function AutoDemo() {
   const stopDemo = useCallback(() => {
     timeoutsRef.current.forEach(clearTimeout)
     timeoutsRef.current = []
+    if (timerRef.current) clearInterval(timerRef.current)
     setRunning(false)
     setStep('')
+    setElapsed(0)
   }, [])
+
+  useEffect(() => {
+    if (running) {
+      timerRef.current = setInterval(() => setElapsed(e => e + 1), 1000)
+    }
+    return () => { if (timerRef.current) clearInterval(timerRef.current) }
+  }, [running])
 
   function startDemo() {
     if (running) { stopDemo(); return }
     setRunning(true)
+    setElapsed(0)
     reset()
 
     const flows = getAllFlows()
@@ -64,7 +76,12 @@ export function AutoDemo() {
       title={running ? 'Stop auto-demo' : 'Run automated 70s demo sequence'}
     >
       {running ? <Square className="h-3 w-3" /> : <Play className="h-3 w-3" />}
-      {running ? (step || 'Running...') : 'Auto Demo'}
+      {running ? (
+        <span className="flex items-center gap-1.5">
+          <span className="tabular-nums">{elapsed}s</span>
+          <span className="max-w-[120px] truncate">{step}</span>
+        </span>
+      ) : 'Auto Demo'}
     </button>
   )
 }

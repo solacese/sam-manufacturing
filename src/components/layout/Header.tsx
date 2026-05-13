@@ -24,7 +24,7 @@ export function Header() {
   return (
     <header className="h-12 flex-shrink-0 flex items-center justify-between border-b border-slate-800 bg-[#0f1729] px-5">
       <div className="flex items-center gap-3" title="Shortcuts: 1-8 inject events, Esc reset, F fullscreen">
-        <svg width="28" height="28" viewBox="0 0 40 40" fill="none">
+        <svg width="28" height="28" viewBox="0 0 40 40" fill="none" className="animate-solace-pulse rounded-lg">
           <rect width="40" height="40" rx="8" fill="#00c895"/>
           <path d="M12 20c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
           <path d="M16 20c0-2.2 1.8-4 4-4s4 1.8 4 4" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
