@@ -51,7 +51,18 @@ export function AgentWorkspacePanel() {
               </span>
             ))}
           </div>
-          <div className="mt-1 text-[8px] text-slate-500">Agents: <span className="text-slate-300 font-bold">9</span> · Messages: <span className="text-slate-300 font-bold">{agentMessages.length}</span></div>
+          <div className="mt-1.5 flex items-center gap-2">
+            <div className="flex-1 h-1 rounded-full bg-slate-700 overflow-hidden">
+              <div
+                className="h-full rounded-full transition-all duration-1000 ease-out"
+                style={{
+                  width: isResolving ? `${Math.min(90, agentMessages.length * 8)}%` : '100%',
+                  backgroundColor: isResolving ? '#f59e0b' : '#00c895',
+                }}
+              />
+            </div>
+            <span className="text-[8px] text-slate-500 font-mono">{agentMessages.length} msgs</span>
+          </div>
         </div>
       )}
 
