@@ -14,8 +14,16 @@ export function ScenarioGenerator() {
     if (!prompt.trim() || loading) return
     setLoading(true)
     setStatus('Generating production flow...')
+    const slowTimer = setTimeout(() => setStatus('AI is thinking... (complex scenario)'), 6000)
+    const controller = new AbortController()
+    const timeout = setTimeout(() => controller.abort(), 45000)
     try {
-      const res = await fetch('/api/generate-scenario', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ industry: 'custom', companyDescription: prompt.trim() }) })
+      const res = await fetch('/api/generate-scenario', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        signal: controller.signal,
+        body: JSON.stringify({ industry: 'custom', companyDescription: prompt.trim() }),
+      })
       if (!res.ok) throw new Error('Failed')
       const data = await res.json()
       if (data.flow) {
@@ -30,16 +38,18 @@ export function ScenarioGenerator() {
         }
         if (!flow.firstPassYield) flow.firstPassYield = 95 + Math.random() * 4
         if (!flow.taktTime) flow.taktTime = flow.cycleTime || '30 min'
-        setStatus(`Created: ${flow.category} (${flow.steps?.length || 0} steps)`)
+        setStatus(`✓ Created: ${flow.category} (${flow.steps?.length || 0} steps)`)
         selectFlow(flow)
       }
       setPrompt('')
       setTimeout(() => setStatus(''), 4000)
     } catch (err) {
       console.error(err)
-      setStatus('Failed to generate')
-      setTimeout(() => setStatus(''), 3000)
+      setStatus(err instanceof DOMException && err.name === 'AbortError' ? 'Timeout — try a simpler scenario' : 'Failed to generate')
+      setTimeout(() => setStatus(''), 4000)
     } finally {
+      clearTimeout(slowTimer)
+      clearTimeout(timeout)
       setLoading(false)
     }
   }
