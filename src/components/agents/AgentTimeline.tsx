@@ -16,10 +16,12 @@ export function AgentTimeline({ messages }: AgentTimelineProps) {
   }, [messages.length])
 
   return (
-    <div className="space-y-2 pb-2">
+    <div className="space-y-1.5 pb-2">
       <div className="relative">
-        <div className="absolute left-3 top-0 bottom-0 w-px bg-gradient-to-b from-indigo-500/50 via-cyan-500/30 to-transparent" />
-        <div className="space-y-2">
+        {/* Vertical timeline line */}
+        <div className="absolute left-[9px] top-0 bottom-0 w-[1.5px] bg-gradient-to-b from-[#00c895]/60 via-[#00c895]/30 to-transparent" />
+
+        <div className="space-y-1.5">
           {messages.map((msg, idx) => (
             <AgentMessageCard key={msg.id} message={msg} index={idx} />
           ))}
