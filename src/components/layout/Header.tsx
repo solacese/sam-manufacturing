@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useSimulationStore } from '@/store/simulation-store'
-import { Activity, Wifi, Network, Zap, RotateCcw, Maximize2 } from 'lucide-react'
+import { Activity, Wifi, Network, Zap, RotateCcw, Maximize2, Share2 } from 'lucide-react'
 import Link from 'next/link'
 import { AutoDemo } from './AutoDemo'
 import { DemoScript } from './DemoScript'
@@ -72,6 +72,9 @@ export function Header() {
         </button>
         <button onClick={() => document.documentElement.requestFullscreen?.()} className="text-slate-500 hover:text-white transition-colors" title="Fullscreen">
           <Maximize2 className="h-3 w-3" />
+        </button>
+        <button onClick={() => { navigator.clipboard?.writeText(window.location.href); }} className="text-slate-500 hover:text-white transition-colors" title="Copy demo URL">
+          <Share2 className="h-3 w-3" />
         </button>
         <DemoScript />
       </div>

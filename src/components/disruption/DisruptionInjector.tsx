@@ -49,6 +49,9 @@ export function DisruptionInjector() {
       <div className="flex items-center gap-2 mb-2">
         <AlertTriangle className="h-3.5 w-3.5 text-amber-400" />
         <span className="text-[10px] font-bold text-slate-300">Supply Chain Events</span>
+        {Object.values(counts).reduce((a, b) => a + b, 0) > 0 && (
+          <span className="text-[8px] text-slate-600 font-mono">{Object.values(counts).reduce((a, b) => a + b, 0)} injected</span>
+        )}
         <span className="text-[9px] text-slate-600">(press 1-8 or click)</span>
         {isResolving && (
           <span className="ml-auto flex items-center gap-1.5 text-[9px] text-amber-300 font-semibold bg-amber-500/10 rounded-full px-2 py-0.5 border border-amber-500/30">
