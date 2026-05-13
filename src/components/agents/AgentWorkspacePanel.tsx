@@ -32,7 +32,7 @@ export function AgentWorkspacePanel() {
     <div className="flex h-full flex-col bg-[#080d1a]">
       <div className="flex-shrink-0 flex items-center gap-2 px-3 py-2 border-b border-slate-800 bg-[#0f1729]">
         <div className="h-5 w-5 rounded bg-[#00c895] flex items-center justify-center"><Network className="h-3 w-3 text-white" /></div>
-        <span className="text-[10px] font-bold text-white">Agent Mesh Coordination</span>
+        <span className="text-[10px] font-bold text-white">Agent+Event Mesh</span>
         <ElapsedTimer running={isResolving} />
         {hasDisruptions && <span className={cn('ml-auto text-[9px] font-bold rounded-full px-2 py-0.5 border', isResolving ? 'text-amber-300 bg-amber-500/10 border-amber-500/30' : 'text-[#00c895] bg-[#00c895]/10 border-[#00c895]/30')}>{isResolving ? `${activeDisruptions.length} active` : 'resolved'}</span>}
       </div>

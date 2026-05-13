@@ -81,18 +81,20 @@ export function SupplyChainView() {
         </div>
       </div>
 
-      {/* Event Mesh underline */}
+      {/* Event+Agent Mesh underline */}
       <div className="mt-3 rounded-xl border border-[#00c895]/20 bg-[#00c895]/5 px-4 py-2.5">
         <div className="flex items-center justify-between">
           <div>
-            <div className="text-[10px] font-bold text-[#00c895]">Solace Agent Mesh</div>
+            <div className="text-[10px] font-bold text-[#00c895]">Solace Agent+Event Mesh</div>
             <div className="text-[8px] text-slate-400 mt-0.5">
-              AI agents subscribe to events, detect anomalies, and coordinate resolutions autonomously via A2A protocol
+              Events stream in real-time → Agents detect anomalies → A2A coordination → Autonomous resolution
             </div>
           </div>
-          <div className="text-right">
-            <div className="text-[8px] text-slate-500">Events published once</div>
-            <div className="text-[8px] text-slate-500">consumed by many agents</div>
+          <div className="text-right text-[8px]">
+            <div className="text-[#00c895] font-bold">Event Mesh</div>
+            <div className="text-slate-500">routes events to agents</div>
+            <div className="text-[#00c895] font-bold mt-0.5">Agent Mesh</div>
+            <div className="text-slate-500">resolves autonomously</div>
           </div>
         </div>
       </div>

@@ -228,7 +228,7 @@ export default function ArchitecturePage() {
 
           {/* Key Benefits */}
           <div className="rounded-xl border border-[#00c895]/20 bg-[#00c895]/5 p-4">
-            <h3 className="text-xs font-bold text-[#00c895] mb-2">Why Solace Agent Mesh?</h3>
+            <h3 className="text-xs font-bold text-[#00c895] mb-2">Why Solace Agent+Event Mesh?</h3>
             <div className="space-y-1.5 text-[9px] text-slate-300">
               <div className="flex items-start gap-2"><span className="text-[#00c895] font-bold">1.</span> AI agents discover and delegate tasks autonomously via A2A protocol</div>
               <div className="flex items-start gap-2"><span className="text-[#00c895] font-bold">2.</span> Orchestrator decomposes complex problems across specialist agents</div>
