@@ -47,8 +47,13 @@ export function SessionSummary() {
         <MiniStat label="Supplier" value={supCount} color="#06b6d4" />
       </div>
 
-      <div className="text-[10px] text-slate-400 text-center border-t border-slate-800 pt-3">
-        All events routed through the <span className="text-[#00c895] font-bold">Solace Agent+Event Mesh</span> with sub-millisecond latency
+      <div className="text-[10px] text-slate-400 text-center border-t border-slate-800 pt-3 space-y-2">
+        <p>All events routed through the <span className="text-[#00c895] font-bold">Solace Agent+Event Mesh</span> with sub-millisecond latency</p>
+        <div className="flex items-center justify-center gap-3">
+          <a href="https://solace.com" target="_blank" rel="noopener noreferrer" className="text-[#00c895] hover:text-white font-semibold transition-colors">solace.com</a>
+          <span className="text-slate-700">|</span>
+          <a href="https://solace.com/contact" target="_blank" rel="noopener noreferrer" className="text-[#00c895] hover:text-white font-semibold transition-colors">Contact Sales</a>
+        </div>
       </div>
     </div>
   )
