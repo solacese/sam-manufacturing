@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { ArrowLeft, Network, Factory, Database, Globe, Cpu, Radio, Shield, BarChart3, Layers, Zap } from 'lucide-react'
 import { cn } from '@/lib/cn'
@@ -32,11 +32,21 @@ const plants = [
 export default function ArchitecturePage() {
   const [selectedSystem, setSelectedSystem] = useState<string | null>(null)
   const [hoveredAgent, setHoveredAgent] = useState<string | null>(null)
+  const [eventCount, setEventCount] = useState(142857)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setEventCount(c => c + Math.floor(Math.random() * 5) + 1)
+    }, 200)
+    return () => clearInterval(interval)
+  }, [])
 
   const selected = systems.find(s => s.id === selectedSystem)
 
   return (
-    <div className="min-h-screen bg-[#0b1120] text-slate-100 p-6">
+    <div className="min-h-screen bg-[#0b1120] text-slate-100 p-6 relative overflow-hidden">
+      {/* Background grid */}
+      <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle, #00c895 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div className="flex items-center gap-4">
@@ -55,8 +65,13 @@ export default function ArchitecturePage() {
             <h1 className="text-lg font-bold">Solace Agent Mesh <span className="text-[#00c895]">Architecture</span></h1>
           </div>
         </div>
-        <div className="text-[10px] text-slate-400 font-mono bg-slate-800 rounded px-3 py-1.5 border border-slate-700">
-          Event Mesh: Solace PubSub+ | Protocol: SMF/MQTT/AMQP/REST | A2A: Agent-to-Agent
+        <div className="flex items-center gap-4">
+          <div className="text-[10px] text-slate-400 font-mono bg-slate-800 rounded px-3 py-1.5 border border-slate-700">
+            Protocol: SMF/MQTT/AMQP/REST | A2A
+          </div>
+          <div className="text-[10px] font-mono bg-[#00c895]/10 border border-[#00c895]/30 rounded px-3 py-1.5 text-[#00c895] tabular-nums">
+            {eventCount.toLocaleString()} events processed
+          </div>
         </div>
       </div>
 
