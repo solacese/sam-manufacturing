@@ -81,7 +81,7 @@ export function ManufacturingFlowViz() {
           const metrics = step.metrics || {}
           const metricEntries = Object.entries(metrics).slice(0, 2)
           return (
-            <div key={step.id} className={cn('relative rounded-lg border p-2.5 transition-all duration-300 group hover:scale-[1.02] hover:z-10', statusStyles[status])}>
+            <div key={step.id} className={cn('relative rounded-lg border p-2.5 transition-all duration-300 group hover:scale-[1.02] hover:z-10 animate-fade-in', statusStyles[status])} style={{ animationDelay: `${idx * 60}ms` }}>
               <div className="flex items-center gap-1.5 mb-1">
                 <span className={cn('h-2 w-2 rounded-full', dotColors[status])} />
                 <span className="text-[10px] font-bold text-slate-200 truncate">{step.name}</span>

@@ -62,6 +62,17 @@ body {
   animation: count-up 0.3s ease-out;
 }
 
+@keyframes skeleton-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-skeleton {
+  background: linear-gradient(90deg, #1e293b 25%, #334155 50%, #1e293b 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+}
+
 @keyframes flow-particle {
   0% { transform: translateX(0); opacity: 0; }
   20% { opacity: 1; }
