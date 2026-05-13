@@ -43,8 +43,10 @@ export function Header() {
 
         <span className="flex items-center gap-1.5 font-mono">
           <Wifi className="h-3 w-3 text-[#00c895]" />
-          PubSub+ Connected
+          PubSub+
           <span className="h-2 w-2 rounded-full bg-[#00c895] animate-pulse" />
+          <span className="text-slate-600">|</span>
+          <span className="tabular-nums text-slate-400">{isResolving ? '12' : '8'}ms latency</span>
         </span>
 
         {isResolving && (
