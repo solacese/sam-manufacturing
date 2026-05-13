@@ -89,8 +89,15 @@ export function AgentWorkspacePanel() {
       <div className="flex-1 overflow-y-auto px-3 py-2 scrollbar-thin">
         {!hasDisruptions && agentMessages.length === 0 && (
           <div className="flex flex-col items-center justify-center h-full text-center">
-            <p className="text-[11px] font-medium text-slate-400 mb-1">Agents Standing By</p>
-            <p className="text-[9px] text-slate-500">Inject disruptions to activate the mesh</p>
+            <p className="text-[11px] font-medium text-slate-400 mb-1">Agents Monitoring</p>
+            <p className="text-[9px] text-slate-500 mb-3">Subscribed to event topics, ready to react</p>
+            <div className="text-[8px] text-slate-600 space-y-1 text-left w-full max-w-[220px]">
+              <div className="flex justify-between"><span>Orchestrator</span><span className="text-slate-500">solace/+/+/agent/*</span></div>
+              <div className="flex justify-between"><span>Predictive</span><span className="text-slate-500">solace/+/+/sensor/*</span></div>
+              <div className="flex justify-between"><span>Quality</span><span className="text-slate-500">solace/+/+/mes/quality*</span></div>
+              <div className="flex justify-between"><span>Logistics</span><span className="text-slate-500">solace/+/+/logistics/*</span></div>
+              <div className="flex justify-between"><span>Supplier</span><span className="text-slate-500">solace/+/+/supplier/*</span></div>
+            </div>
           </div>
         )}
         {agentMessages.length > 0 && <AgentTimeline messages={agentMessages} />}
