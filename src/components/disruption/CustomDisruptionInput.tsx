@@ -16,6 +16,9 @@ export function CustomDisruptionInput() {
     if (!prompt.trim() || !selectedFlow || loading) return
     setLoading(true)
     setError('')
+    const slowTimer = setTimeout(() => setError('Still generating...'), 5000)
+    const controller = new AbortController()
+    const timeout = setTimeout(() => controller.abort(), 30000)
     try {
       const flowSummary = {
         category: selectedFlow.category,
@@ -28,6 +31,7 @@ export function CustomDisruptionInput() {
       const res = await fetch('/api/generate-disruption', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        signal: controller.signal,
         body: JSON.stringify({ prompt: prompt.trim(), flow: flowSummary }),
       })
       if (!res.ok) throw new Error(`API error ${res.status}`)
@@ -44,8 +48,10 @@ export function CustomDisruptionInput() {
       setPrompt('')
     } catch (err) {
       console.error(err)
-      setError('Failed — check connection')
+      setError(err instanceof DOMException && err.name === 'AbortError' ? 'Timeout — try again' : 'Failed — check connection')
     } finally {
+      clearTimeout(slowTimer)
+      clearTimeout(timeout)
       setLoading(false)
     }
   }
