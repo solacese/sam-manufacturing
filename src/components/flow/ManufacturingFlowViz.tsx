@@ -37,13 +37,17 @@ export function ManufacturingFlowViz() {
 
   return (
     <div className="flex-1 flex flex-col min-h-0">
-      <div className="flex items-center gap-4 mb-2 px-1">
-        <h3 className="text-xs font-bold text-white">{selectedFlow.category}</h3>
-        <div className="ml-auto flex gap-3 text-[9px] font-mono text-slate-400">
-          <span>OEE <span className="text-[#00c895] font-bold">87.2%</span></span>
-          <span>Takt <span className="text-slate-200">{selectedFlow.taktTime}</span></span>
-          <span>Cycle <span className="text-slate-200">{selectedFlow.cycleTime}</span></span>
-          <span>FPY <span className="text-[#00c895] font-bold">{selectedFlow.firstPassYield.toFixed(1)}%</span></span>
+      {/* Stats bar */}
+      <div className="flex items-center gap-2 mb-2 rounded-lg bg-slate-800/60 border border-slate-700/50 px-3 py-1.5">
+        <h3 className="text-[11px] font-bold text-white">{selectedFlow.category}</h3>
+        <span className="text-[9px] text-slate-500 font-mono">{selectedFlow.plant}/{selectedFlow.line}</span>
+        <div className="ml-auto flex gap-3">
+          <MetricPill label="OEE" value="87.2%" accent />
+          <MetricPill label="Avail" value="94.1%" />
+          <MetricPill label="Perf" value="96.3%" />
+          <MetricPill label="Qual" value="96.2%" />
+          <MetricPill label="Takt" value={selectedFlow.taktTime} />
+          <MetricPill label="FPY" value={`${selectedFlow.firstPassYield.toFixed(1)}%`} accent />
         </div>
       </div>
 
@@ -73,5 +77,14 @@ export function ManufacturingFlowViz() {
         })}
       </div>
     </div>
+  )
+}
+
+function MetricPill({ label, value, accent }: { label: string; value: string; accent?: boolean }) {
+  return (
+    <span className="text-[9px] font-mono">
+      <span className="text-slate-500">{label} </span>
+      <span className={accent ? 'text-[#00c895] font-bold' : 'text-slate-200'}>{value}</span>
+    </span>
   )
 }
