@@ -53,17 +53,28 @@ export function AgentWorkspacePanel() {
               </span>
             ))}
           </div>
-          <div className="mt-1.5 flex items-center gap-2">
-            <div className="flex-1 h-1 rounded-full bg-slate-700 overflow-hidden">
-              <div
-                className="h-full rounded-full transition-all duration-1000 ease-out"
-                style={{
-                  width: isResolving ? `${Math.min(90, agentMessages.length * 8)}%` : '100%',
-                  backgroundColor: isResolving ? '#f59e0b' : '#00c895',
-                }}
-              />
+          <div className="mt-1.5 space-y-1.5">
+            <div className="flex items-center gap-2">
+              <div className="flex-1 h-1 rounded-full bg-slate-700 overflow-hidden">
+                <div
+                  className="h-full rounded-full transition-all duration-1000 ease-out"
+                  style={{
+                    width: isResolving ? `${Math.min(90, agentMessages.length * 8)}%` : '100%',
+                    backgroundColor: isResolving ? '#f59e0b' : '#00c895',
+                  }}
+                />
+              </div>
+              <span className="text-[8px] text-slate-500 font-mono">{agentMessages.length} msgs</span>
             </div>
-            <span className="text-[8px] text-slate-500 font-mono">{agentMessages.length} msgs</span>
+            {/* Active agent indicators */}
+            <div className="flex gap-1 flex-wrap">
+              {agentRoles.map(role => {
+                const isActive = agentMessages.some(m => m.fromAgent === role)
+                return (
+                  <span key={role} className={cn('h-1.5 w-1.5 rounded-full transition-all duration-500', isActive ? '' : 'opacity-20')} style={{ backgroundColor: AGENT_COLORS[role] }} title={AGENT_NAMES[role]} />
+                )
+              })}
+            </div>
           </div>
         </div>
       )}
