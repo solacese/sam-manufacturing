@@ -48,12 +48,21 @@ export const useSimulationStore = create<SimulationState>((set, get) => ({
     }),
 
   injectDisruption: (disruption) => {
-    const { selectedFlow, flowStepStatuses, activeDisruptions } = get()
+    const { selectedFlow, flowStepStatuses, activeDisruptions, addEvent } = get()
     if (!selectedFlow) return
 
     const newStatuses = [...flowStepStatuses]
     disruption.affectedSteps.forEach((i) => {
       if (i < newStatuses.length) newStatuses[i] = 'error'
+    })
+
+    addEvent({
+      id: `evt-dis-${Date.now()}`,
+      timestamp: Date.now(),
+      topic: `manufacturing/${selectedFlow.plant}/${selectedFlow.line}/agent/disruption-detected`,
+      category: 'disruption',
+      payload: { name: disruption.name, severity: disruption.severity, category: disruption.category },
+      severity: 'critical',
     })
 
     set({

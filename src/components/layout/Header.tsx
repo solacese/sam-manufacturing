@@ -1,7 +1,7 @@
 'use client'
 
 import { useSimulationStore } from '@/store/simulation-store'
-import { Activity, Wifi, Network, Zap } from 'lucide-react'
+import { Activity, Wifi, Network, Zap, RotateCcw } from 'lucide-react'
 import Link from 'next/link'
 
 export function Header() {
@@ -9,6 +9,7 @@ export function Header() {
   const isResolving = useSimulationStore((s) => s.isResolving)
   const activeDisruptions = useSimulationStore((s) => s.activeDisruptions)
   const agentMessages = useSimulationStore((s) => s.agentMessages)
+  const reset = useSimulationStore((s) => s.reset)
 
   return (
     <header className="h-12 flex-shrink-0 flex items-center justify-between border-b border-slate-800 bg-[#0f1729] px-5">
@@ -51,6 +52,10 @@ export function Header() {
             {activeDisruptions.length} disruption{activeDisruptions.length > 1 ? 's' : ''} · {agentMessages.length} A2A msgs
           </span>
         )}
+
+        <button onClick={reset} className="flex items-center gap-1 text-slate-500 hover:text-white transition-colors" title="Reset demo">
+          <RotateCcw className="h-3 w-3" />
+        </button>
       </div>
     </header>
   )

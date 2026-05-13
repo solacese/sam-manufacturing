@@ -162,6 +162,17 @@ export default function ArchitecturePage() {
               ))}
             </div>
           </div>
+
+          {/* Use Cases */}
+          <div className="rounded-xl border border-slate-700 bg-slate-900/50 p-4">
+            <h3 className="text-xs font-bold text-white mb-3">Enterprise Use Cases</h3>
+            <div className="grid grid-cols-2 gap-2">
+              <UseCase industry="Aerospace" company="Airbus / Boeing" example="Wing assembly disruption → multi-agent rerouting across 6 plants" />
+              <UseCase industry="Automotive" company="BMW / Toyota" example="Supply chain delay → automatic alternate sourcing + schedule optimization" />
+              <UseCase industry="Pharma" company="Pfizer / Roche" example="Cleanroom excursion → compliance agent + batch containment in under 1 min" />
+              <UseCase industry="Semiconductors" company="TSMC / Intel" example="Yield drift detection → SPC agent + predictive maintenance coordination" />
+            </div>
+          </div>
         </div>
 
         {/* Right: System Detail Panel */}
@@ -263,6 +274,16 @@ function MetricCard({ label, value }: { label: string; value: string }) {
     <div className="rounded border border-slate-700 bg-slate-800/50 px-2 py-1.5 text-center">
       <div className="text-[8px] text-slate-500 uppercase">{label}</div>
       <div className="text-[12px] font-bold text-[#00c895] font-mono">{value}</div>
+    </div>
+  )
+}
+
+function UseCase({ industry, company, example }: { industry: string; company: string; example: string }) {
+  return (
+    <div className="rounded-lg border border-slate-700/50 bg-slate-800/30 p-2.5">
+      <div className="text-[10px] font-bold text-white mb-0.5">{industry}</div>
+      <div className="text-[8px] text-[#00c895] font-medium mb-1">{company}</div>
+      <div className="text-[9px] text-slate-400 leading-relaxed">{example}</div>
     </div>
   )
 }
