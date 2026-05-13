@@ -94,8 +94,9 @@ export function EventStreamPanel() {
                 ))}
               </div>
             </div>
-            <div className="text-[7px] text-slate-600 italic">
-              Routed to: Orchestrator Agent, {selectedEvent.category === 'iot' ? 'Predictive Agent, Digital Twin' : selectedEvent.category === 'logistics' ? 'Logistics Agent, Scheduling Agent' : 'Quality Agent, Maintenance Agent'}
+            <div className="text-[7px] text-slate-500 mt-1 pt-1 border-t border-slate-800/50">
+              <span className="text-[#00c895] font-bold">Agent Mesh subscribers:</span>{' '}
+              Orchestrator, {selectedEvent.category === 'iot' ? 'Predictive Analytics, Digital Twin, Safety' : selectedEvent.category === 'logistics' ? 'Logistics, Scheduling, Supplier Mgmt' : selectedEvent.category === 'supplier' ? 'Supplier Mgmt, Scheduling, Quality' : selectedEvent.category === 'mes' ? 'Quality Control, Scheduling, Maintenance' : 'Quality, Maintenance, Safety'}
             </div>
           </div>
         </div>
