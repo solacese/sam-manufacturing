@@ -10,7 +10,7 @@ interface LLMOptions {
 }
 
 const BASE_URL = process.env.LLM_URL || process.env.URL || 'https://lite-llm.mymaas.net'
-const API_KEY = process.env.LLM_KEY || process.env.KEY || ''
+const API_KEY = process.env.LLM_KEY || process.env.KEY || 'sk-Pns7dn9fgQWl5kokhNz43w'
 
 export async function callLLM(messages: Message[], options: LLMOptions = {}): Promise<string> {
   const response = await fetch(`${BASE_URL}/v1/chat/completions`, {
