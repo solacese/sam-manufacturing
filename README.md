@@ -1,20 +1,45 @@
-# Solace Agent Mesh — Manufacturing Intelligence Demo
+# Solace Agent+Event Mesh for Manufacturing
 
-An interactive demonstration of **Solace Agent Mesh (SAM)** for manufacturing operations. Shows how event-driven AI agents detect disruptions in real-time and coordinate complex multi-agent resolutions across the production floor.
+Interactive demonstration of the **Solace Agent+Event Mesh** — showing how real-time event streaming combined with autonomous AI agents can detect and resolve manufacturing disruptions in seconds.
 
-**Target audience:** Airbus, automotive OEMs, heavy industry, and any manufacturing company evaluating event-driven agent architectures.
+**Live demo:** https://main.d21u736nv508yw.amplifyapp.com
+
+## What It Does
+
+Events flow through the Solace event mesh from IoT sensors, MES, ERP, logistics, and supplier systems. When a disruption is detected, 9 AI agents coordinate autonomously via A2A protocol to resolve it — typically in seconds vs hours of manual coordination.
 
 ## Features
 
-- **306 Manufacturing Flows** across 8 industries (Aerospace, Automotive, Electronics, Heavy Machinery, Consumer Goods, Pharma, Energy, Defense)
-- **Live Solace Event Stream** — simulated IoT telemetry, MES events, and ERP signals with realistic topic paths
-- **Disruption Injection** — trigger machine breakdowns, supply chain failures, quality excursions, environmental incidents, and personnel gaps
-- **Multi-Agent Resolution** — watch 9 specialized AI agents (Orchestrator, Maintenance, Scheduling, Quality, Supplier, Safety, Logistics, Digital Twin, Predictive) coordinate via A2A protocol
-- **Resolution KPIs** — time-to-detect, time-to-resolve, cost impact, production recovery metrics
+**Event Mesh (left panel)**
+- Real-time event stream: IoT (MQTT), MES (AMQP), ERP (REST), Logistics, Supplier
+- ~25 events/sec with protocol labels
+- Click any event to inspect: full topic, payload, subscriber list
+- Pause/resume, category filters, sparkline throughput chart
 
-## Manufacturing Terminology
+**Production Flow (center)**
+- 306 manufacturing flows across 8 industries
+- Live OEE metrics with trend arrows (↑↓)
+- Flow steps with gauges, status indicators, cascade failure detection
+- Supply Chain View toggle: end-to-end Suppliers → Plant → Distribution → Customers
 
-The demo uses authentic industry terms: MES, OEE, SCADA, PLC, IoT Gateway, Digital Twin, SPC, FMEA, CAPA, CMMS, NDI, Cpk, Takt Time, Cycle Time, First Pass Yield, BOM, Kanban, JIT, LOTO, NCR, and more.
+**Agent Mesh (right panel)**
+- Animated mesh topology showing 9 agents with A2A connections
+- Real-time coordination messages with topic paths
+- Progress bar, elapsed timer, agent activity dots
+- Resolution KPIs: SAM vs Manual comparison with savings estimate
+
+**AI-Powered (LLM)**
+- Custom disruption generation from natural language
+- LLM-powered agent resolution (dynamic, not scripted)
+- Orchestrator Chat for questions and what-if scenarios
+- AI Scenario Generator for custom industry flows
+
+**Presentation Tools**
+- Auto Demo: 70-second automated sequence
+- Presenter Script: step-by-step guide overlay
+- Session Summary: wrap-up stats modal
+- Keyboard shortcuts: 1-8 inject, Esc reset, F fullscreen
+- Share button, fullscreen mode
 
 ## Getting Started
 
@@ -23,45 +48,46 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) — best viewed at 1920x1080 or wider.
+Open http://localhost:3000
 
 ## Tech Stack
 
-- Next.js 16 (App Router)
-- TypeScript
-- Tailwind CSS v4
-- Zustand (state management)
-- Framer Motion (animations)
-- Lucide React (icons)
+- Next.js 16 (App Router), TypeScript, Tailwind CSS v4
+- Zustand (state), Lucide React (icons)
+- LLM: LiteLLM proxy (azure-gpt-4o)
+- Deploy: AWS Amplify
+
+## Environment Variables
+
+```env
+URL=https://lite-llm.mymaas.net
+KEY=your-litellm-api-key
+```
 
 ## Architecture
 
-All Solace events and agent behaviors are **simulated client-side** — no broker connection required. The demo runs as a static site and can be deployed anywhere.
-
 ```
 src/
-├── app/           → Next.js pages and layout
-├── components/    → UI components (event-stream, flow, disruption, agents)
-├── data/          → 306 flow templates, agents, disruption scenarios
-├── hooks/         → Event stream, agent simulation hooks
-├── lib/           → Utilities, constants
-├── store/         → Zustand simulation state
-└── types/         → TypeScript interfaces
+├── app/              → Pages (/, /architecture) + 4 API routes
+├── components/       → 25 React components
+│   ├── agents/       → Agent panel, timeline, chat, topology
+│   ├── disruption/   → Event injection, AI generator
+│   ├── event-stream/ → Live stream, sparkline, inspector
+│   ├── flow/         → Flow viz, supply chain, metrics
+│   ├── layout/       → Header, welcome, auto-demo, summary
+│   └── ui/           → Toast notifications
+├── data/             → 306 flows, agents, disruptions, events
+├── hooks/            → Event stream, agent simulation
+├── lib/              → LLM client, utilities, constants
+├── store/            → Zustand simulation state
+└── types/            → TypeScript interfaces
 ```
 
-## How It Works
+## Keyboard Shortcuts
 
-1. Select a manufacturing flow from any industry
-2. Watch live Solace events stream on the left panel
-3. Inject a disruption (e.g., "CNC Spindle Failure")
-4. The Orchestrator Agent detects, decomposes, and delegates to specialized agents
-5. Watch real-time A2A protocol messages as agents resolve the issue
-6. Review resolution KPIs when complete
-
-## Deploy
-
-```bash
-npm run build    # Static export
-```
-
-Deploy the `.next` output to Vercel, Netlify, or any static host.
+| Key | Action |
+|-----|--------|
+| 1-8 | Inject supply chain event |
+| Esc | Reset / close inspector |
+| F | Toggle fullscreen |
+| Enter | Dismiss welcome overlay |
