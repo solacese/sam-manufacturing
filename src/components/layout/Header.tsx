@@ -1,7 +1,8 @@
 'use client'
 
 import { useSimulationStore } from '@/store/simulation-store'
-import { Activity, Wifi } from 'lucide-react'
+import { Activity, Wifi, Network } from 'lucide-react'
+import Link from 'next/link'
 
 export function Header() {
   const events = useSimulationStore((s) => s.events)
@@ -22,7 +23,10 @@ export function Header() {
         </div>
       </div>
       <div className="flex items-center gap-5 text-[11px] text-slate-400">
-        <span className="flex items-center gap-1.5"><Activity className="h-3 w-3 text-[#00c895]" /><span className="font-mono">{events.length > 0 ? '3' : '0'} ev/s</span></span>
+        <Link href="/architecture" className="flex items-center gap-1.5 text-[#00c895] hover:text-white transition-colors font-medium">
+          <Network className="h-3 w-3" />Architecture
+        </Link>
+        <span className="flex items-center gap-1.5"><Activity className="h-3 w-3 text-[#00c895]" /><span className="font-mono">{events.length > 0 ? '25' : '0'} ev/s</span></span>
         <span className="flex items-center gap-1.5"><Wifi className="h-3 w-3 text-[#00c895]" /><span className="font-mono">PubSub+ Connected</span><span className="h-2 w-2 rounded-full bg-[#00c895]" /></span>
         {isResolving && <span className="flex items-center gap-1.5 text-amber-400 font-semibold"><span className="h-2 w-2 rounded-full bg-amber-400 animate-pulse" />Agents Active</span>}
       </div>
