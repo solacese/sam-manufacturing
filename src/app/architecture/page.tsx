@@ -90,9 +90,14 @@ export default function ArchitecturePage() {
             <div className="absolute -top-3 left-6 bg-[#0b1120] px-3">
               <span className="text-sm font-bold text-[#00c895]">Solace PubSub+ Event Mesh</span>
             </div>
-            <div className="flex items-center justify-center gap-3 mb-4">
+            <div className="flex items-center justify-center gap-3 mb-3">
               <Zap className="h-5 w-5 text-[#00c895]" />
               <p className="text-xs text-slate-300">Topic-based pub/sub routing | Guaranteed delivery | Multi-protocol | Global mesh</p>
+            </div>
+            <div className="flex items-center justify-center gap-2 mb-4">
+              {['SMF', 'MQTT', 'AMQP', 'REST', 'WebSocket', 'JMS'].map(p => (
+                <span key={p} className="text-[8px] font-bold text-[#00c895] bg-[#00c895]/10 border border-[#00c895]/20 rounded px-1.5 py-0.5">{p}</span>
+              ))}
             </div>
 
             {/* Agent Mesh inside Solace */}
