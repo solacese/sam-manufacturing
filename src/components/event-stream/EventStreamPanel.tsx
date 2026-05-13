@@ -35,6 +35,17 @@ export function EventStreamPanel() {
     if (!paused && scrollRef.current) scrollRef.current.scrollTop = scrollRef.current.scrollHeight
   }, [events.length, paused])
 
+  useEffect(() => {
+    function handleEsc(e: KeyboardEvent) {
+      if (e.key === 'Escape' && selectedEvent) {
+        setSelectedEvent(null)
+        setPaused(false)
+      }
+    }
+    window.addEventListener('keydown', handleEsc)
+    return () => window.removeEventListener('keydown', handleEsc)
+  }, [selectedEvent])
+
   function toggleFilter(key: EventCategory) {
     setFilters(prev => {
       const next = new Set(prev)

@@ -9,6 +9,18 @@ import { AgentRole } from '@/types'
 
 const agentRoles: AgentRole[] = ['orchestrator', 'maintenance', 'scheduling', 'quality', 'supplier', 'safety', 'logistics', 'digital-twin', 'predictive']
 
+const agentTools: Record<AgentRole, string> = {
+  orchestrator: 'Tools: task-decomposition, agent-routing, priority-scoring, escalation',
+  maintenance: 'Tools: CMMS query, spare-parts lookup, work-order creation, MTBF analysis',
+  scheduling: 'Tools: schedule-optimizer, capacity-planner, bottleneck-analysis',
+  quality: 'Tools: SPC analysis, CAPA workflow, FMEA lookup, NCR generation',
+  supplier: 'Tools: AVL query, alternative-source, lead-time calc, purchase-order',
+  safety: 'Tools: safety-protocol, LOTO verification, incident-report, risk-assessment',
+  logistics: 'Tools: WMS query, material-tracking, Kanban signal, AGV routing',
+  'digital-twin': 'Tools: simulation-engine, impact-prediction, what-if analysis',
+  predictive: 'Tools: anomaly-detection, RUL estimation, trend-analysis, failure-forecast',
+}
+
 const systems = [
   { id: 'mes', name: 'MES', fullName: 'Manufacturing Execution System', icon: Factory, color: '#a78bfa', description: 'Real-time production tracking, work orders, batch control, OEE monitoring, operator dispatch', topics: ['manufacturing/+/+/mes/production-order', 'manufacturing/+/+/mes/oee-update', 'manufacturing/+/+/mes/batch-complete'] },
   { id: 'erp', name: 'ERP', fullName: 'Enterprise Resource Planning', icon: Database, color: '#fbbf24', description: 'Sales orders, inventory management, BOM, procurement, financial planning, demand forecasting', topics: ['manufacturing/+/+/erp/sales-order', 'manufacturing/+/+/erp/inventory-level', 'manufacturing/+/+/erp/supplier-update'] },
@@ -121,6 +133,7 @@ export default function ArchitecturePage() {
                   <div key={role}
                     onMouseEnter={() => setHoveredAgent(role)}
                     onMouseLeave={() => setHoveredAgent(null)}
+                    title={agentTools[role]}
                     className={cn('rounded-lg border p-2 text-center transition-all cursor-pointer', hoveredAgent === role ? 'border-white/50 scale-105 shadow-lg' : 'border-slate-700 hover:border-slate-500')}
                     style={{ backgroundColor: hoveredAgent === role ? AGENT_COLORS[role] + '20' : undefined }}>
                     <div className="h-4 w-4 rounded-full mx-auto mb-1" style={{ backgroundColor: AGENT_COLORS[role] }} />
