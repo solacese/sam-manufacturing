@@ -5,6 +5,7 @@ import { useSimulationStore } from '@/store/simulation-store'
 import { Activity, Wifi, Network, Zap, RotateCcw, Maximize2 } from 'lucide-react'
 import Link from 'next/link'
 import { AutoDemo } from './AutoDemo'
+import { DemoScript } from './DemoScript'
 
 export function Header() {
   const events = useSimulationStore((s) => s.events)
@@ -72,6 +73,7 @@ export function Header() {
         <button onClick={() => document.documentElement.requestFullscreen?.()} className="text-slate-500 hover:text-white transition-colors" title="Fullscreen">
           <Maximize2 className="h-3 w-3" />
         </button>
+        <DemoScript />
       </div>
     </header>
   )
