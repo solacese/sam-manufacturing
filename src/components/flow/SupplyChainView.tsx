@@ -58,13 +58,16 @@ export function SupplyChainView() {
                   <Icon className="h-5 w-5 mx-auto mb-1.5" style={{ color: hasDisruption ? '#ef4444' : node.color }} />
                   <div className="text-[10px] font-bold text-slate-200">{node.label}</div>
                   <div className="text-[8px] text-slate-500">{node.sublabel}</div>
-                  <div className="mt-1.5 flex items-center justify-center gap-2">
-                    <span className="text-[7px] font-mono rounded bg-slate-700/50 px-1 py-0.5" style={{ color: node.color }}>
-                      {node.protocol}
-                    </span>
-                    <span className="text-[7px] font-mono text-slate-500 tabular-nums">
-                      {counters[idx]} ev
-                    </span>
+                  <div className="mt-1.5 flex flex-col items-center gap-1">
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-[7px] font-mono rounded bg-slate-700/50 px-1 py-0.5" style={{ color: node.color }}>
+                        {node.protocol}
+                      </span>
+                      <span className="text-[7px] font-mono text-slate-500 tabular-nums">
+                        {counters[idx]} ev
+                      </span>
+                    </div>
+                    <span className="text-[6px] text-[#00c895]/60">{node.agents.split(',')[0]}</span>
                   </div>
                   {hasDisruption && (
                     <div className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-red-500 animate-ping" />

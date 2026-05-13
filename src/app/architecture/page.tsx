@@ -141,6 +141,12 @@ export default function ArchitecturePage() {
                   </div>
                 ))}
               </div>
+              {hoveredAgent && (
+                <div className="mt-2 text-[9px] text-slate-400 bg-slate-800/50 rounded px-3 py-1.5 animate-fade-in">
+                  <span className="font-bold" style={{ color: AGENT_COLORS[hoveredAgent] }}>{AGENT_NAMES[hoveredAgent]}</span>
+                  {' — '}{agentTools[hoveredAgent]}
+                </div>
+              )}
             </div>
 
             {/* Connected Systems */}
