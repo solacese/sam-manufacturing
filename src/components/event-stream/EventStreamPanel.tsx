@@ -103,8 +103,8 @@ export function EventStreamPanel() {
 
       <div ref={scrollRef} className="flex-1 overflow-y-auto px-1.5 py-0.5 scrollbar-thin">
         {displayEvents.map(event => (
-          <div key={event.id} onClick={() => { setPaused(true); frozenRef.current = [...events]; setSelectedEvent(event) }} className="cursor-pointer">
-            <EventCard event={event} />
+          <div key={event.id} onClick={() => { if (!paused) { frozenRef.current = [...events]; setPaused(true) }; setSelectedEvent(event) }} className="cursor-pointer hover:bg-slate-800/30">
+            <EventCard event={event} selected={selectedEvent?.id === event.id} />
           </div>
         ))}
       </div>

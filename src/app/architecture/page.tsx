@@ -62,7 +62,7 @@ export default function ArchitecturePage() {
               <path d="M16 20c0-2.2 1.8-4 4-4s4 1.8 4 4" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
               <circle cx="20" cy="20" r="1.5" fill="white"/>
             </svg>
-            <h1 className="text-lg font-bold">Solace Agent Mesh <span className="text-[#00c895]">Architecture</span></h1>
+            <h1 className="text-lg font-bold">Solace <span className="text-[#00c895]">Agent+Event Mesh</span> Architecture</h1>
           </div>
         </div>
         <div className="flex items-center gap-4">
@@ -88,7 +88,7 @@ export default function ArchitecturePage() {
               ))}
             </div>
             <div className="absolute -top-3 left-6 bg-[#0b1120] px-3">
-              <span className="text-sm font-bold text-[#00c895]">Solace Platform — Event Mesh + Agent Mesh</span>
+              <span className="text-sm font-bold text-[#00c895]">Solace Agent+Event Mesh</span>
             </div>
             <div className="flex items-center justify-center gap-3 mb-3">
               <Zap className="h-5 w-5 text-[#00c895]" />
@@ -104,7 +104,7 @@ export default function ArchitecturePage() {
             <div className="rounded-xl border-2 border-[#00c895]/30 bg-[#00c895]/5 p-4 mb-4">
               <div className="flex items-center gap-2 mb-3">
                 <Network className="h-4 w-4 text-[#00c895]" />
-                <span className="text-xs font-bold text-[#00c895]">Solace Agent Mesh (A2A Protocol)</span>
+                <span className="text-xs font-bold text-[#00c895]">Agent Mesh — A2A Protocol</span>
                 <span className="text-[8px] text-slate-500 ml-auto font-mono">{'solace/agent-mesh/v1/{agent}/{action}'}</span>
               </div>
               <div className="grid grid-cols-5 gap-2">
