@@ -112,9 +112,13 @@ export function EventStreamPanel() {
                 ))}
               </div>
             </div>
-            <div className="text-[7px] text-slate-500 mt-1 pt-1 border-t border-slate-800/50">
-              <span className="text-[#00c895] font-bold">Agent Mesh subscribers:</span>{' '}
-              Orchestrator, {selectedEvent.category === 'iot' ? 'Predictive Analytics, Digital Twin, Safety' : selectedEvent.category === 'logistics' ? 'Logistics, Scheduling, Supplier Mgmt' : selectedEvent.category === 'supplier' ? 'Supplier Mgmt, Scheduling, Quality' : selectedEvent.category === 'mes' ? 'Quality Control, Scheduling, Maintenance' : 'Quality, Maintenance, Safety'}
+            <div className="text-[7px] text-slate-500 mt-1 pt-1 border-t border-slate-800/50 flex items-start gap-2">
+              <span className="text-[#00c895] bg-[#00c895]/10 rounded px-1 py-0.5 font-bold flex-shrink-0">
+                {selectedEvent.category === 'iot' ? '4' : selectedEvent.category === 'logistics' ? '3' : '3'} subscribers
+              </span>
+              <span>
+                Orchestrator, {selectedEvent.category === 'iot' ? 'Predictive, Digital Twin, Safety' : selectedEvent.category === 'logistics' ? 'Logistics, Scheduling' : selectedEvent.category === 'supplier' ? 'Supplier, Scheduling' : selectedEvent.category === 'mes' ? 'Quality, Scheduling' : 'Quality, Maintenance'}
+              </span>
             </div>
           </div>
         </div>

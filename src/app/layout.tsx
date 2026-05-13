@@ -18,6 +18,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${inter.variable} ${jetbrains.variable} h-full`}>
+      <head>
+        <meta name="theme-color" content="#0b1120" />
+        <meta name="color-scheme" content="dark" />
+      </head>
       <body className="h-full bg-[#0b1120] text-slate-100 font-sans antialiased">{children}</body>
     </html>
   );
