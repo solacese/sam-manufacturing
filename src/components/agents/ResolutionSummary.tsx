@@ -35,6 +35,9 @@ export function ResolutionSummary({ kpis }: { kpis: ResolutionKPIs }) {
           <CompareBar label="Coordination" sam="Instant" manual="~45 min" samPct={98} />
           <CompareBar label="Resolution" sam={kpis.timeToResolve} manual="4-8 hours" samPct={75} />
         </div>
+        <div className="mt-2 pt-2 border-t border-slate-700/30 text-[8px] text-slate-400 text-center">
+          Estimated savings: <span className="text-[#00c895] font-bold">3-6 hours</span> per incident · <span className="text-[#00c895] font-bold">{kpis.costImpact}</span> protected
+        </div>
       </div>
     </div>
   )
