@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { useSimulationStore } from '@/store/simulation-store'
 import { Activity, Wifi, Network, Zap, RotateCcw, Maximize2 } from 'lucide-react'
 import Link from 'next/link'
@@ -10,7 +11,15 @@ export function Header() {
   const isResolving = useSimulationStore((s) => s.isResolving)
   const activeDisruptions = useSimulationStore((s) => s.activeDisruptions)
   const agentMessages = useSimulationStore((s) => s.agentMessages)
+  const resolutionComplete = useSimulationStore((s) => s.resolutionComplete)
   const reset = useSimulationStore((s) => s.reset)
+  const [totalResolved, setTotalResolved] = useState(0)
+
+  useEffect(() => {
+    if (resolutionComplete && activeDisruptions.length > 0) {
+      setTotalResolved(prev => prev + activeDisruptions.length)
+    }
+  }, [resolutionComplete])
 
   return (
     <header className="h-12 flex-shrink-0 flex items-center justify-between border-b border-slate-800 bg-[#0f1729] px-5">
@@ -39,6 +48,7 @@ export function Header() {
         <span className="flex items-center gap-1.5 font-mono">
           <Activity className="h-3 w-3 text-[#00c895]" />
           <span className="tabular-nums">{events.length.toLocaleString()} events</span>
+          {totalResolved > 0 && <span className="text-[#00c895]">· {totalResolved} resolved</span>}
         </span>
 
         <span className="flex items-center gap-1.5 font-mono">
