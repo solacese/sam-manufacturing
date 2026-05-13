@@ -3,6 +3,7 @@
 import { AgentMessage } from '@/types'
 import { AgentMessageCard } from './AgentMessageCard'
 import { useEffect, useRef } from 'react'
+import { useSimulationStore } from '@/store/simulation-store'
 
 interface AgentTimelineProps {
   messages: AgentMessage[]
@@ -10,6 +11,7 @@ interface AgentTimelineProps {
 
 export function AgentTimeline({ messages }: AgentTimelineProps) {
   const endRef = useRef<HTMLDivElement>(null)
+  const isResolving = useSimulationStore((s) => s.isResolving)
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -27,6 +29,21 @@ export function AgentTimeline({ messages }: AgentTimelineProps) {
           ))}
         </div>
       </div>
+
+      {/* Typing indicator when resolving */}
+      {isResolving && (
+        <div className="pl-6 animate-fade-in">
+          <div className="flex items-center gap-1.5 px-2 py-1.5 rounded-md bg-slate-800/30 border border-slate-700/30 w-fit">
+            <div className="flex gap-0.5">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#00c895] animate-bounce" style={{ animationDelay: '0ms' }} />
+              <span className="h-1.5 w-1.5 rounded-full bg-[#00c895] animate-bounce" style={{ animationDelay: '150ms' }} />
+              <span className="h-1.5 w-1.5 rounded-full bg-[#00c895] animate-bounce" style={{ animationDelay: '300ms' }} />
+            </div>
+            <span className="text-[8px] text-slate-500">agents coordinating...</span>
+          </div>
+        </div>
+      )}
+
       <div ref={endRef} />
     </div>
   )
