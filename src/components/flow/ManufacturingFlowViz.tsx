@@ -50,11 +50,15 @@ export function ManufacturingFlowViz() {
 
   if (!selectedFlow) return <div className="flex-1 flex items-center justify-center text-slate-500 text-sm">Select a flow</div>
 
+  const errorCount = flowStepStatuses.filter(s => s === 'error').length
+  const isCascade = errorCount >= 4
+
   return (
     <div className="flex-1 flex flex-col min-h-0">
       {/* Stats bar */}
-      <div className="flex items-center gap-2 mb-2 rounded-lg bg-slate-800/60 border border-slate-700/50 px-3 py-1.5">
+      <div className={cn('flex items-center gap-2 mb-2 rounded-lg border px-3 py-1.5 transition-all duration-500', isCascade ? 'bg-red-950/30 border-red-500/40' : 'bg-slate-800/60 border-slate-700/50')}>
         <h3 className="text-[11px] font-bold text-white">{selectedFlow.category}</h3>
+        {isCascade && <span className="text-[8px] font-bold text-red-400 bg-red-500/10 border border-red-500/30 rounded px-1.5 py-0.5 animate-pulse">CASCADE FAILURE</span>}
         <span className="text-[9px] text-slate-500 font-mono">{selectedFlow.plant}/{selectedFlow.line}</span>
         <div className="ml-auto flex gap-3">
           <MetricPill label="OEE" value={`${oee.oee}%`} accent />
