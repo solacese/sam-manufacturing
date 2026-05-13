@@ -92,8 +92,13 @@ export const useSimulationStore = create<SimulationState>((set, get) => ({
     set((state) => ({
       isResolving: false,
       resolutionComplete: true,
-      flowStepStatuses: state.flowStepStatuses.map((s) => s === 'error' ? 'running' : s),
+      flowStepStatuses: state.flowStepStatuses.map((s) => s === 'error' ? 'complete' : s),
     }))
+    setTimeout(() => {
+      set((state) => ({
+        flowStepStatuses: state.flowStepStatuses.map((s) => s === 'complete' ? 'running' : s),
+      }))
+    }, 2000)
     setTimeout(() => {
       set({ activeDisruptions: [], agentMessages: [], resolutionComplete: false })
     }, 5000)
