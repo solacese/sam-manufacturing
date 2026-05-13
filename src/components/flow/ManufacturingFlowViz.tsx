@@ -66,12 +66,13 @@ export function ManufacturingFlowViz() {
           const metrics = step.metrics || {}
           const metricEntries = Object.entries(metrics).slice(0, 2)
           return (
-            <div key={step.id} title={step.description} className={cn('relative rounded-lg border p-2.5 transition-all duration-300 group', statusStyles[status])}>
-              <div className="flex items-center gap-1.5 mb-1.5">
+            <div key={step.id} className={cn('relative rounded-lg border p-2.5 transition-all duration-300 group hover:scale-[1.02] hover:z-10', statusStyles[status])}>
+              <div className="flex items-center gap-1.5 mb-1">
                 <span className={cn('h-2 w-2 rounded-full', dotColors[status])} />
                 <span className="text-[10px] font-bold text-slate-200 truncate">{step.name}</span>
                 <span className="ml-auto text-[8px] font-mono text-slate-500">{step.duration}</span>
               </div>
+              <p className="text-[8px] text-slate-500 mb-1.5 line-clamp-1 group-hover:line-clamp-none">{step.description}</p>
               {metricEntries.map(([key, val]) => (
                 <div key={key} className="mb-1">
                   <div className="flex justify-between text-[8px]"><span className="text-slate-500 capitalize">{key}</span><span className="text-slate-300 font-mono">{val as number}</span></div>

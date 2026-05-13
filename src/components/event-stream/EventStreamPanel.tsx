@@ -69,9 +69,11 @@ export function EventStreamPanel() {
           <EventCard key={event.id} event={event} />
         ))}
       </div>
-      <div className="border-t border-slate-800 px-3 py-1 text-[8px] font-mono text-slate-500 flex justify-between">
-        <span>{displayEvents.length} shown / {events.length} total</span>
-        <span>{paused ? 'PAUSED' : '~25 ev/s'}</span>
+      <div className="border-t border-slate-800 px-3 py-1.5 text-[8px] font-mono text-slate-500 flex justify-between items-center">
+        <span>{displayEvents.length} / {events.length}</span>
+        <span className={cn('font-bold', paused ? 'text-amber-400' : 'text-[#00c895]')}>
+          {paused ? '⏸ PAUSED' : '● LIVE ~25 ev/s'}
+        </span>
       </div>
     </div>
   )

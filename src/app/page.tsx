@@ -7,6 +7,7 @@ import { FlowSelector } from '@/components/flow/FlowSelector'
 import { ScenarioGenerator } from '@/components/flow/ScenarioGenerator'
 import { ManufacturingFlowViz } from '@/components/flow/ManufacturingFlowViz'
 import { MeshHealth } from '@/components/flow/MeshHealth'
+import { FlowBackground } from '@/components/flow/FlowBackground'
 import { DisruptionInjector } from '@/components/disruption/DisruptionInjector'
 import { CustomDisruptionInput } from '@/components/disruption/CustomDisruptionInput'
 import { AgentWorkspacePanel } from '@/components/agents/AgentWorkspacePanel'
@@ -44,7 +45,8 @@ export default function Home() {
           {/* TOP ROW: Flow center + Agent panel right */}
           <div className="flex-1 flex min-h-0">
             {/* CENTER: Flow */}
-            <div className="flex-1 flex flex-col p-4 gap-3 min-w-0">
+            <div className="flex-1 flex flex-col p-4 gap-3 min-w-0 relative">
+              <FlowBackground />
               <div className="flex gap-2 items-center">
                 <div className="flex-1"><FlowSelector /></div>
               </div>
