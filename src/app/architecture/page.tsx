@@ -75,6 +75,15 @@ export default function ArchitecturePage() {
         </div>
       </div>
 
+      {/* Value prop banner */}
+      <div className="mb-6 rounded-xl bg-gradient-to-r from-[#00c895]/10 via-transparent to-[#00c895]/5 border border-[#00c895]/20 px-5 py-3 flex items-center justify-between">
+        <div className="text-[11px] text-slate-300">
+          <span className="text-[#00c895] font-bold">Event Mesh</span> streams real-time data from any source →{' '}
+          <span className="text-[#00c895] font-bold">Agent Mesh</span> coordinates autonomous resolution →{' '}
+          <span className="text-white font-bold">3-6 hours saved</span> per incident
+        </div>
+      </div>
+
       {/* Main Architecture Diagram */}
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-6">
         {/* Left: Architecture */}
