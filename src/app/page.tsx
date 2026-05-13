@@ -34,7 +34,7 @@ export default function Home() {
 
       <div className="flex-1 flex min-h-0">
         {/* LEFT: Event Stream */}
-        <aside className="w-[280px] flex-shrink-0 border-r border-gray-200">
+        <aside className="w-[280px] flex-shrink-0 border-r border-slate-800">
           <EventStreamPanel />
         </aside>
 
@@ -52,13 +52,13 @@ export default function Home() {
             </div>
 
             {/* RIGHT: Agent Resolution */}
-            <aside className="w-[380px] flex-shrink-0 border-l border-gray-200">
+            <aside className="w-[380px] flex-shrink-0 border-l border-slate-800">
               <AgentWorkspacePanel />
             </aside>
           </div>
 
           {/* BOTTOM: Disruption injection */}
-          <div className="flex-shrink-0 border-t border-gray-200 bg-white px-4 py-3">
+          <div className="flex-shrink-0 border-t border-slate-800 bg-[#0f1729] px-4 py-3">
             <CustomDisruptionInput />
             <DisruptionInjector />
           </div>

@@ -3,7 +3,6 @@
 import { useEffect, useRef } from 'react'
 import { useSimulationStore } from '@/store/simulation-store'
 import { Disruption, AgentMessage } from '@/types'
-import { generateId } from '@/lib/utils'
 
 export function useAgentSimulation() {
   const activeDisruptions = useSimulationStore((s) => s.activeDisruptions)
@@ -13,6 +12,7 @@ export function useAgentSimulation() {
   const completeResolution = useSimulationStore((s) => s.completeResolution)
   const timeoutsRef = useRef<NodeJS.Timeout[]>([])
   const processedRef = useRef<Set<string>>(new Set())
+  const pendingRef = useRef(0)
 
   useEffect(() => {
     if (!isResolving || activeDisruptions.length === 0) return
@@ -22,6 +22,7 @@ export function useAgentSimulation() {
 
     newDisruptions.forEach((disruption) => {
       processedRef.current.add(disruption.id)
+      pendingRef.current++
 
       if (disruption.resolutionScript && disruption.resolutionScript.length > 0) {
         playScriptedResolution(disruption)
@@ -30,17 +31,28 @@ export function useAgentSimulation() {
       }
     })
 
+    function onDisruptionDone() {
+      pendingRef.current--
+      if (pendingRef.current <= 0) {
+        pendingRef.current = 0
+        setTimeout(() => {
+          completeResolution()
+          processedRef.current.clear()
+        }, 1500)
+      }
+    }
+
     function playScriptedResolution(disruption: Disruption) {
       const script = disruption.resolutionScript
-      let delay = 800
+      let delay = 500 + Math.random() * 500
 
       script.forEach((msg, idx) => {
         const timeout = setTimeout(() => {
           addAgentMessage(msg)
-          if (idx === script.length - 1) checkAllComplete()
+          if (idx === script.length - 1) onDisruptionDone()
         }, delay)
         timeoutsRef.current.push(timeout)
-        delay += 1800 + Math.random() * 1200
+        delay += 1500 + Math.random() * 1000
       })
     }
 
@@ -51,50 +63,31 @@ export function useAgentSimulation() {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ disruption, flow: selectedFlow }),
         })
-
         if (!res.ok) throw new Error('API failed')
         const data = await res.json()
         const messages: Omit<AgentMessage, 'id' | 'timestamp'>[] = data.messages || []
 
-        let delay = 500
+        let delay = 300
         messages.forEach((msg, idx) => {
           const timeout = setTimeout(() => {
             addAgentMessage(msg)
-            if (idx === messages.length - 1) checkAllComplete()
+            if (idx === messages.length - 1) onDisruptionDone()
           }, delay)
           timeoutsRef.current.push(timeout)
-          delay += 1500 + Math.random() * 1000
+          delay += 1200 + Math.random() * 800
         })
-      } catch (err) {
-        console.error('LLM resolution failed, using fallback:', err)
+      } catch {
         addAgentMessage({
           fromAgent: 'orchestrator',
           type: 'event-detected',
-          content: `CRITICAL: ${disruption.name} detected. Initiating multi-agent resolution protocol via Solace Agent Mesh A2A.`,
+          content: `CRITICAL: ${disruption.name} detected. Initiating multi-agent resolution via Solace Agent Mesh.`,
           status: 'complete',
         })
-        const fallback = setTimeout(() => {
-          addAgentMessage({
-            fromAgent: 'orchestrator',
-            type: 'resolution',
-            content: `Resolution in progress. Agents deployed across event mesh topics. Monitoring via SCADA integration. ETA for full recovery: pending analysis.`,
-            status: 'complete',
-          })
-          checkAllComplete()
-        }, 3000)
-        timeoutsRef.current.push(fallback)
+        setTimeout(() => {
+          addAgentMessage({ fromAgent: 'orchestrator', type: 'resolution', content: `Resolution protocol active. Agents deployed across mesh topics.`, status: 'complete' })
+          onDisruptionDone()
+        }, 2000)
       }
-    }
-
-    function checkAllComplete() {
-      setTimeout(() => {
-        const store = useSimulationStore.getState()
-        const allProcessed = store.activeDisruptions.every((d) => processedRef.current.has(d.id))
-        if (allProcessed) {
-          completeResolution()
-          processedRef.current.clear()
-        }
-      }, 1500)
     }
 
     return () => {
