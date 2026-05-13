@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { useSimulationStore } from '@/store/simulation-store'
 import { cn } from '@/lib/cn'
 import { Factory, Truck, Ship, Package, Users, CheckCircle } from 'lucide-react'
@@ -16,19 +17,27 @@ const nodes = [
 export function SupplyChainView() {
   const isResolving = useSimulationStore((s) => s.isResolving)
   const activeDisruptions = useSimulationStore((s) => s.activeDisruptions)
+  const [counters, setCounters] = useState<number[]>(nodes.map(() => 0))
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCounters(prev => prev.map(c => c + Math.floor(Math.random() * 3) + 1))
+    }, 800)
+    return () => clearInterval(interval)
+  }, [])
 
   return (
     <div className="flex-1 flex flex-col min-h-0">
       {/* Title bar */}
-      <div className="flex items-center gap-2 mb-2 rounded-lg bg-slate-800/60 border border-slate-700/50 px-3 py-1.5">
+      <div className="flex items-center gap-2 mb-3 rounded-lg bg-slate-800/60 border border-slate-700/50 px-3 py-1.5">
         <h3 className="text-[11px] font-bold text-white">End-to-End Supply Chain</h3>
         <span className="text-[9px] text-slate-500 font-mono">Connected via Solace Platform — Agent Mesh</span>
-        <span className="ml-auto text-[8px] text-[#00c895] font-bold">{nodes.length} systems · 4 protocols</span>
+        <span className="ml-auto text-[8px] text-[#00c895] font-bold">{nodes.length} systems · 4 protocols · 9 agents</span>
       </div>
 
       {/* Supply chain flow */}
       <div className="flex-1 flex items-center justify-center">
-        <div className="flex items-center gap-1 w-full max-w-[700px]">
+        <div className="flex items-center gap-1.5 w-full">
           {nodes.map((node, idx) => {
             const Icon = node.icon
             const hasDisruption = isResolving && activeDisruptions.some(d =>
@@ -41,22 +50,29 @@ export function SupplyChainView() {
             return (
               <div key={node.id} className="flex items-center flex-1">
                 <div className={cn(
-                  'flex-1 rounded-lg border p-3 text-center transition-all duration-300',
+                  'flex-1 rounded-xl border p-3 text-center transition-all duration-300 relative',
                   hasDisruption
                     ? 'bg-red-950/30 border-red-500/50 animate-error-pulse'
-                    : 'bg-slate-800/60 border-slate-700/50 hover:border-slate-500'
+                    : 'bg-slate-800/60 border-slate-700/50 hover:border-[#00c895]/40 hover:bg-slate-800'
                 )}>
                   <Icon className="h-5 w-5 mx-auto mb-1.5" style={{ color: hasDisruption ? '#ef4444' : node.color }} />
                   <div className="text-[10px] font-bold text-slate-200">{node.label}</div>
                   <div className="text-[8px] text-slate-500">{node.sublabel}</div>
-                  <div className="mt-1 text-[7px] font-mono rounded bg-slate-700/50 px-1 py-0.5 inline-block" style={{ color: node.color }}>
-                    {node.protocol}
+                  <div className="mt-1.5 flex items-center justify-center gap-2">
+                    <span className="text-[7px] font-mono rounded bg-slate-700/50 px-1 py-0.5" style={{ color: node.color }}>
+                      {node.protocol}
+                    </span>
+                    <span className="text-[7px] font-mono text-slate-500 tabular-nums">
+                      {counters[idx]} ev
+                    </span>
                   </div>
+                  {hasDisruption && (
+                    <div className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-red-500 animate-ping" />
+                  )}
                 </div>
                 {idx < nodes.length - 1 && (
-                  <div className="flex-shrink-0 w-4 h-px mx-0.5 relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-r from-slate-600 to-slate-600" />
-                    <div className="absolute top-0 h-full w-3 bg-[#00c895] animate-flow-particle" />
+                  <div className="flex-shrink-0 w-6 h-[2px] mx-0.5 relative overflow-hidden rounded-full bg-slate-700">
+                    <div className="absolute top-0 h-full w-4 bg-[#00c895] rounded-full animate-flow-particle" />
                   </div>
                 )}
               </div>
@@ -66,10 +82,18 @@ export function SupplyChainView() {
       </div>
 
       {/* Event Mesh underline */}
-      <div className="mt-3 rounded-lg border border-[#00c895]/20 bg-[#00c895]/5 px-4 py-2 text-center">
-        <div className="text-[10px] font-bold text-[#00c895]">Solace Platform — Agent Mesh</div>
-        <div className="text-[8px] text-slate-400 mt-0.5">
-          Events published once, consumed by many · Sub-ms delivery · Guaranteed messaging · Global mesh federation
+      <div className="mt-3 rounded-xl border border-[#00c895]/20 bg-[#00c895]/5 px-4 py-2.5">
+        <div className="flex items-center justify-between">
+          <div>
+            <div className="text-[10px] font-bold text-[#00c895]">Solace Agent Mesh</div>
+            <div className="text-[8px] text-slate-400 mt-0.5">
+              AI agents subscribe to events, detect anomalies, and coordinate resolutions autonomously via A2A protocol
+            </div>
+          </div>
+          <div className="text-right">
+            <div className="text-[8px] text-slate-500">Events published once</div>
+            <div className="text-[8px] text-slate-500">consumed by many agents</div>
+          </div>
         </div>
       </div>
     </div>

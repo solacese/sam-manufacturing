@@ -101,11 +101,11 @@ export default function ArchitecturePage() {
             </div>
 
             {/* Agent Mesh inside Solace */}
-            <div className="rounded-xl border border-slate-700 bg-slate-900/50 p-4 mb-4">
+            <div className="rounded-xl border-2 border-[#00c895]/30 bg-[#00c895]/5 p-4 mb-4">
               <div className="flex items-center gap-2 mb-3">
                 <Network className="h-4 w-4 text-[#00c895]" />
-                <span className="text-xs font-bold text-white">Agent Mesh (A2A Protocol)</span>
-                <span className="text-[8px] text-slate-500 ml-auto font-mono">{'topic: solace/agent-mesh/v1/{agent}/{action}'}</span>
+                <span className="text-xs font-bold text-[#00c895]">Solace Agent Mesh (A2A Protocol)</span>
+                <span className="text-[8px] text-slate-500 ml-auto font-mono">{'solace/agent-mesh/v1/{agent}/{action}'}</span>
               </div>
               <div className="grid grid-cols-5 gap-2">
                 {agentRoles.map(role => (
@@ -230,11 +230,12 @@ export default function ArchitecturePage() {
           <div className="rounded-xl border border-[#00c895]/20 bg-[#00c895]/5 p-4">
             <h3 className="text-xs font-bold text-[#00c895] mb-2">Why Solace Agent Mesh?</h3>
             <div className="space-y-1.5 text-[9px] text-slate-300">
-              <div className="flex items-start gap-2"><span className="text-[#00c895] font-bold">1.</span> Agents discover and delegate tasks autonomously via event mesh</div>
-              <div className="flex items-start gap-2"><span className="text-[#00c895] font-bold">2.</span> Sub-millisecond event delivery across global manufacturing sites</div>
-              <div className="flex items-start gap-2"><span className="text-[#00c895] font-bold">3.</span> Protocol-agnostic: MQTT for IoT, AMQP for MES, REST for ERP</div>
-              <div className="flex items-start gap-2"><span className="text-[#00c895] font-bold">4.</span> Guaranteed delivery ensures no disruption event is ever lost</div>
-              <div className="flex items-start gap-2"><span className="text-[#00c895] font-bold">5.</span> Scale to millions of events/sec without code changes</div>
+              <div className="flex items-start gap-2"><span className="text-[#00c895] font-bold">1.</span> AI agents discover and delegate tasks autonomously via A2A protocol</div>
+              <div className="flex items-start gap-2"><span className="text-[#00c895] font-bold">2.</span> Orchestrator decomposes complex problems across specialist agents</div>
+              <div className="flex items-start gap-2"><span className="text-[#00c895] font-bold">3.</span> Event-driven: agents react to real-time signals from any connected system</div>
+              <div className="flex items-start gap-2"><span className="text-[#00c895] font-bold">4.</span> Solace Platform guarantees delivery — no event is ever lost</div>
+              <div className="flex items-start gap-2"><span className="text-[#00c895] font-bold">5.</span> Scale from 9 agents to thousands without architecture changes</div>
+              <div className="flex items-start gap-2"><span className="text-[#00c895] font-bold">6.</span> Hybrid deployment: agents run on-prem, cloud, or edge simultaneously</div>
             </div>
           </div>
 
