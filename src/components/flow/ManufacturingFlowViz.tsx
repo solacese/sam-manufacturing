@@ -67,12 +67,16 @@ export function ManufacturingFlowViz() {
       </div>
 
       {/* Flow direction indicator */}
-      <div className="flex items-center gap-1 mb-1 text-[8px] text-slate-600">
-        <span>Raw Materials</span>
-        <span className="flex-1 border-t border-dashed border-slate-700 mx-1" />
-        <span>→ Processing → Assembly → Quality →</span>
-        <span className="flex-1 border-t border-dashed border-slate-700 mx-1" />
-        <span>Finished Goods</span>
+      <div className="flex items-center gap-1 mb-1 text-[8px] text-slate-600 relative">
+        <span className="text-slate-500 font-medium">Raw Materials</span>
+        <div className="flex-1 h-px bg-gradient-to-r from-slate-700 via-[#00c895]/30 to-slate-700 mx-2 relative overflow-hidden">
+          <div className="absolute top-0 h-px w-8 bg-[#00c895] animate-flow-particle" />
+        </div>
+        <span className="text-slate-500">Processing → Assembly → QC</span>
+        <div className="flex-1 h-px bg-gradient-to-r from-slate-700 via-[#00c895]/30 to-slate-700 mx-2 relative overflow-hidden">
+          <div className="absolute top-0 h-px w-8 bg-[#00c895] animate-flow-particle" style={{ animationDelay: '1.5s' }} />
+        </div>
+        <span className="text-slate-500 font-medium">Finished Goods</span>
       </div>
 
       <div className="flex-1 grid grid-cols-4 gap-2 content-start">
