@@ -6,12 +6,12 @@ import { cn } from '@/lib/cn'
 import { Factory, Truck, Ship, Package, Users, CheckCircle } from 'lucide-react'
 
 const nodes = [
-  { id: 'suppliers', label: 'Suppliers', sublabel: 'SAP / Oracle', icon: Package, color: '#06b6d4', protocol: 'AMQP' },
-  { id: 'logistics-in', label: 'Inbound Logistics', sublabel: 'TMS / Fleet', icon: Ship, color: '#f97316', protocol: 'MQTT' },
-  { id: 'plant', label: 'Plant Floor', sublabel: 'MES / SCADA / IoT', icon: Factory, color: '#00c895', protocol: 'MQTT' },
-  { id: 'quality', label: 'Quality', sublabel: 'QMS / SPC', icon: CheckCircle, color: '#8b5cf6', protocol: 'REST' },
-  { id: 'logistics-out', label: 'Distribution', sublabel: 'WMS / 3PL', icon: Truck, color: '#f97316', protocol: 'JMS' },
-  { id: 'customers', label: 'Customers', sublabel: 'CRM / Portal', icon: Users, color: '#3b82f6', protocol: 'REST' },
+  { id: 'suppliers', label: 'Suppliers', sublabel: 'SAP / Oracle', icon: Package, color: '#06b6d4', protocol: 'AMQP', agents: 'Supplier Agent, Scheduling' },
+  { id: 'logistics-in', label: 'Inbound Logistics', sublabel: 'TMS / Fleet', icon: Ship, color: '#f97316', protocol: 'MQTT', agents: 'Logistics Agent, Predictive' },
+  { id: 'plant', label: 'Plant Floor', sublabel: 'MES / SCADA / IoT', icon: Factory, color: '#00c895', protocol: 'MQTT', agents: 'Maintenance, Digital Twin' },
+  { id: 'quality', label: 'Quality', sublabel: 'QMS / SPC', icon: CheckCircle, color: '#8b5cf6', protocol: 'REST', agents: 'Quality Agent, Safety' },
+  { id: 'logistics-out', label: 'Distribution', sublabel: 'WMS / 3PL', icon: Truck, color: '#f97316', protocol: 'JMS', agents: 'Logistics Agent, Scheduling' },
+  { id: 'customers', label: 'Customers', sublabel: 'CRM / Portal', icon: Users, color: '#3b82f6', protocol: 'REST', agents: 'Orchestrator, Scheduling' },
 ]
 
 export function SupplyChainView() {
@@ -49,8 +49,8 @@ export function SupplyChainView() {
 
             return (
               <div key={node.id} className="flex items-center flex-1">
-                <div className={cn(
-                  'flex-1 rounded-xl border p-3 text-center transition-all duration-300 relative',
+                <div title={`Agents: ${node.agents}`} className={cn(
+                  'flex-1 rounded-xl border p-3 text-center transition-all duration-300 relative cursor-default',
                   hasDisruption
                     ? 'bg-red-950/30 border-red-500/50 animate-error-pulse'
                     : 'bg-slate-800/60 border-slate-700/50 hover:border-[#00c895]/40 hover:bg-slate-800'
