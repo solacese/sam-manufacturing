@@ -49,7 +49,7 @@ export function EventStreamPanel() {
     <div className="flex h-full flex-col bg-[#080d1a]">
       <div className="flex items-center gap-2 px-3 py-2 border-b border-slate-800">
         <Radio className="h-3.5 w-3.5 text-[#00c895]" />
-        <span className="text-[9px] font-bold uppercase tracking-widest text-slate-400">Events</span>
+        <span className="text-[9px] font-bold uppercase tracking-widest text-slate-400">Solace Events</span>
         <div className="ml-auto flex items-center gap-1">
           {filterOptions.map(f => (
             <button key={f.key} onClick={() => toggleFilter(f.key)}
