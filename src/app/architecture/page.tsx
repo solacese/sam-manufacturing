@@ -221,6 +221,18 @@ export default function ArchitecturePage() {
           {/* Data Flow Summary */}
           <DataFlowSection />
 
+          {/* Key Benefits */}
+          <div className="rounded-xl border border-[#00c895]/20 bg-[#00c895]/5 p-4">
+            <h3 className="text-xs font-bold text-[#00c895] mb-2">Why Solace Agent Mesh?</h3>
+            <div className="space-y-1.5 text-[9px] text-slate-300">
+              <div className="flex items-start gap-2"><span className="text-[#00c895] font-bold">1.</span> Agents discover and delegate tasks autonomously via event mesh</div>
+              <div className="flex items-start gap-2"><span className="text-[#00c895] font-bold">2.</span> Sub-millisecond event delivery across global manufacturing sites</div>
+              <div className="flex items-start gap-2"><span className="text-[#00c895] font-bold">3.</span> Protocol-agnostic: MQTT for IoT, AMQP for MES, REST for ERP</div>
+              <div className="flex items-start gap-2"><span className="text-[#00c895] font-bold">4.</span> Guaranteed delivery ensures no disruption event is ever lost</div>
+              <div className="flex items-start gap-2"><span className="text-[#00c895] font-bold">5.</span> Scale to millions of events/sec without code changes</div>
+            </div>
+          </div>
+
           {/* Key Metrics */}
           <div className="rounded-xl border border-slate-700 bg-slate-900/50 p-4">
             <h3 className="text-xs font-bold text-white mb-3">Platform Metrics</h3>
