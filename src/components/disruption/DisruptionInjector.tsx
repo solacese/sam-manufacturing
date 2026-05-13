@@ -69,7 +69,10 @@ export function DisruptionInjector() {
             )}>
             {icons[d.category]}
             <span className="text-[10px] font-medium leading-tight line-clamp-1">{d.name}</span>
-            <span className="absolute top-0.5 right-1 text-[7px] text-slate-600 font-mono">{idx + 1}</span>
+            <span className="absolute top-0.5 right-1 flex items-center gap-1">
+              <span className={cn('h-1.5 w-1.5 rounded-full', d.severity === 'critical' ? 'bg-red-500' : d.severity === 'high' ? 'bg-amber-500' : 'bg-yellow-500')} />
+              <span className="text-[7px] text-slate-600 font-mono">{idx + 1}</span>
+            </span>
             {counts[d.id] && (
               <span className="absolute -top-1 -right-1 h-3.5 w-3.5 rounded-full bg-red-500 text-[7px] font-bold text-white flex items-center justify-center animate-count-up">
                 {counts[d.id]}
