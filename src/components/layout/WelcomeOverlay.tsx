@@ -41,23 +41,23 @@ export function WelcomeOverlay() {
                 <circle cx="20" cy="20" r="1.5" fill="white"/>
               </svg>
               <div>
-                <h2 className="text-base font-bold text-white">Solace PubSub+ Event Mesh</h2>
-                <p className="text-[9px] text-slate-400">Manufacturing & Supply Chain Intelligence</p>
+                <h2 className="text-base font-bold text-white">Solace Agent Mesh</h2>
+                <p className="text-[9px] text-slate-400">AI Agents Coordinating on the Solace Platform</p>
               </div>
             </div>
             <button onClick={dismiss} className="text-slate-400 hover:text-white"><X className="h-4 w-4" /></button>
           </div>
 
           <p className="text-[12px] text-slate-300 mb-4 leading-relaxed">
-            A <span className="text-[#00c895] font-semibold">real-time event mesh</span> connects your entire supply chain — from IoT sensors on the plant floor to ERP systems, logistics networks, and AI agents — enabling instant visibility, dynamic routing, and autonomous disruption resolution.
+            <span className="text-[#00c895] font-semibold">Solace Agent Mesh</span> enables teams of AI agents to autonomously detect and resolve manufacturing disruptions in real-time — communicating via events on the Solace Platform.
           </p>
 
           <div className="space-y-2.5 mb-5">
-            <Step icon={<Globe className="h-3.5 w-3.5 text-[#00c895]" />} text="Global event mesh: IoT, MES, ERP, logistics all connected via PubSub+" />
-            <Step icon={<Radio className="h-3.5 w-3.5 text-cyan-400" />} text="Multi-protocol: MQTT sensors, AMQP MES, REST ERP — all on one mesh" />
-            <Step icon={<Zap className="h-3.5 w-3.5 text-amber-400" />} text="AI Agent Mesh: 9 agents coordinate autonomously via A2A protocol" />
+            <Step icon={<Zap className="h-3.5 w-3.5 text-[#00c895]" />} text="9 AI agents coordinate autonomously via A2A protocol on the Solace Platform" />
+            <Step icon={<Globe className="h-3.5 w-3.5 text-cyan-400" />} text="Real-time events from IoT, MES, ERP, logistics — all flowing through the mesh" />
             <Step icon={<AlertTriangle className="h-3.5 w-3.5 text-red-400" />} text="Inject supply chain events — disruptions, demand spikes, logistics delays" />
-            <Step icon={<Wand2 className="h-3.5 w-3.5 text-violet-400" />} text="AI-powered: generate custom scenarios and ask the Orchestrator agent" />
+            <Step icon={<Radio className="h-3.5 w-3.5 text-amber-400" />} text="Watch agents detect, decompose, delegate, and resolve in seconds" />
+            <Step icon={<Wand2 className="h-3.5 w-3.5 text-violet-400" />} text="AI-powered: generate custom scenarios and chat with the Orchestrator" />
           </div>
 
           <button onClick={dismiss} className="w-full rounded-lg bg-[#00c895] hover:bg-[#00ad84] py-2.5 text-sm font-semibold text-white transition-all active:scale-[0.98]">

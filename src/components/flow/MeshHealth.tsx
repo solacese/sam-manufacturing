@@ -25,7 +25,7 @@ export function MeshHealth() {
     <div className="flex items-center gap-3 text-[8px] font-mono text-slate-500 mt-1 px-1 py-0.5 rounded bg-slate-800/30 border border-slate-800/50">
       <span className="flex items-center gap-1">
         <Activity className="h-2.5 w-2.5 text-[#00c895]" />
-        <span className="text-slate-400 font-bold">PubSub+</span>
+        <span className="text-slate-400 font-bold">Solace Platform</span>
       </span>
       <span className="flex items-center gap-0.5"><Server className="h-2.5 w-2.5" />{uniqueTopics} active topics</span>
       <span className="flex items-center gap-0.5"><Cpu className="h-2.5 w-2.5" /><span className="tabular-nums">{throughput.toLocaleString()}</span> msg/s</span>

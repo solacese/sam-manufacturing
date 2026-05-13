@@ -7,7 +7,7 @@ const jetbrains = JetBrains_Mono({ variable: "--font-mono", subsets: ["latin"] }
 
 export const metadata: Metadata = {
   title: "Solace Agent Mesh — Manufacturing Intelligence",
-  description: "Event-driven AI agent coordination for manufacturing. Powered by Solace PubSub+.",
+  description: "Event-driven AI agent coordination for manufacturing. Powered by Solace Platform.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

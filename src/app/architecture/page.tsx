@@ -88,7 +88,7 @@ export default function ArchitecturePage() {
               ))}
             </div>
             <div className="absolute -top-3 left-6 bg-[#0b1120] px-3">
-              <span className="text-sm font-bold text-[#00c895]">Solace PubSub+ Event Mesh</span>
+              <span className="text-sm font-bold text-[#00c895]">Solace Platform — Event Mesh + Agent Mesh</span>
             </div>
             <div className="flex items-center justify-center gap-3 mb-3">
               <Zap className="h-5 w-5 text-[#00c895]" />

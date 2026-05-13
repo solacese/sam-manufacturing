@@ -31,8 +31,8 @@ export function Header() {
           <circle cx="20" cy="20" r="1.5" fill="white"/>
         </svg>
         <div>
-          <h1 className="text-sm font-bold text-white">Solace <span className="text-[#00c895]">PubSub+</span></h1>
-          <p className="text-[9px] text-slate-500">Real-Time Manufacturing & Supply Chain</p>
+          <h1 className="text-sm font-bold text-white">Solace <span className="text-[#00c895]">Agent Mesh</span></h1>
+          <p className="text-[9px] text-slate-500">AI Agents on the Solace Platform</p>
         </div>
       </div>
 
@@ -53,7 +53,7 @@ export function Header() {
 
         <span className="flex items-center gap-1.5 font-mono">
           <Wifi className="h-3 w-3 text-[#00c895]" />
-          Event Mesh
+          Solace Platform
           <span className="h-2 w-2 rounded-full bg-[#00c895] animate-pulse" />
           <span className="text-slate-600">|</span>
           <span className="tabular-nums text-slate-400">{isResolving ? '12' : '8'}ms</span>

@@ -19,7 +19,7 @@ export async function POST(request: Request) {
 
     const systemPrompt = `You are the Orchestrator Agent in a Solace Agent Mesh manufacturing intelligence platform. You coordinate 8 specialized agents: Maintenance, Scheduling, Quality Control, Supplier Management, Safety & Compliance, Logistics, Digital Twin, and Predictive Analytics.
 
-You communicate via Solace PubSub+ event mesh using A2A protocol topics.
+You communicate via Solace Platform event mesh using A2A protocol topics.
 
 ${flowContext}
 ${disruptionContext}

@@ -22,7 +22,7 @@ export function SupplyChainView() {
       {/* Title bar */}
       <div className="flex items-center gap-2 mb-2 rounded-lg bg-slate-800/60 border border-slate-700/50 px-3 py-1.5">
         <h3 className="text-[11px] font-bold text-white">End-to-End Supply Chain</h3>
-        <span className="text-[9px] text-slate-500 font-mono">Connected via Solace PubSub+ Event Mesh</span>
+        <span className="text-[9px] text-slate-500 font-mono">Connected via Solace Platform — Agent Mesh</span>
         <span className="ml-auto text-[8px] text-[#00c895] font-bold">{nodes.length} systems · 4 protocols</span>
       </div>
 
@@ -67,7 +67,7 @@ export function SupplyChainView() {
 
       {/* Event Mesh underline */}
       <div className="mt-3 rounded-lg border border-[#00c895]/20 bg-[#00c895]/5 px-4 py-2 text-center">
-        <div className="text-[10px] font-bold text-[#00c895]">Solace PubSub+ Event Mesh</div>
+        <div className="text-[10px] font-bold text-[#00c895]">Solace Platform — Agent Mesh</div>
         <div className="text-[8px] text-slate-400 mt-0.5">
           Events published once, consumed by many · Sub-ms delivery · Guaranteed messaging · Global mesh federation
         </div>

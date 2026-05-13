@@ -9,7 +9,7 @@ export async function POST(request: Request) {
       ? `Production flow: "${flow.category}" at ${flow.plant}/${flow.line}. Steps: ${flow.steps.map((s: { name: string }, i: number) => `[${i}] ${s.name}`).join(', ')}. Cycle time: ${flow.cycleTime}, FPY: ${flow.firstPassYield}%`
       : ''
 
-    const systemPrompt = `You are simulating a Solace Agent Mesh with 9 specialized AI agents resolving a manufacturing disruption via event-driven A2A protocol over Solace PubSub+.
+    const systemPrompt = `You are simulating a Solace Agent Mesh with 9 specialized AI agents resolving a manufacturing disruption via event-driven A2A protocol over Solace Platform.
 
 Agents available:
 - orchestrator: Decomposes tasks, routes to specialists, coordinates resolution
