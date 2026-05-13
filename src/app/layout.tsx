@@ -7,7 +7,12 @@ const jetbrains = JetBrains_Mono({ variable: "--font-mono", subsets: ["latin"] }
 
 export const metadata: Metadata = {
   title: "Solace Agent+Event Mesh for Manufacturing",
-  description: "Real-time event streaming + autonomous AI agents for manufacturing disruption detection and resolution.",
+  description: "Real-time event streaming + autonomous AI agents for manufacturing disruption detection and resolution. 9 agents coordinate via A2A protocol on the Solace Platform.",
+  openGraph: {
+    title: "Solace Agent+Event Mesh for Manufacturing",
+    description: "Interactive demo: AI agents detect and resolve manufacturing disruptions in real-time via Solace event mesh. 306 flows, 8 industries, LLM-powered.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

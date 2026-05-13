@@ -37,6 +37,8 @@ export function DisruptionInjector() {
       if (idx >= 0 && idx < disruptions.length) {
         handleInject(disruptions[idx])
       }
+      if (e.key === 'Escape') reset()
+      if (e.key === 'f' || e.key === 'F') document.documentElement.requestFullscreen?.()
     }
     window.addEventListener('keydown', handleKey)
     return () => window.removeEventListener('keydown', handleKey)
